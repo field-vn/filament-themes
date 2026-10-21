@@ -1,0 +1,10 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - src/
+        - tests/Fixtures/
+        - tests/TestCase.php
+
+    level: 7
