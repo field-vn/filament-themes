@@ -1,0 +1,32 @@
+field-vn/filament-themes
+
+This package recreates the visual language of three design systems for Filament. It does not bundle their CSS,
+JavaScript or components; it reuses their published design tokens (colors, radii, spacing, type scale).
+
+Tabler — https://github.com/tabler/tabler
+MIT License, Copyright (c) 2018-2026 The Tabler Authors
+Tokens: @tabler/core 1.6.1, core/scss/_variables.scss and core/scss/tabler-themes.scss ("slate" base).
+
+shadcn/ui — https://github.com/shadcn-ui/ui
+MIT License, Copyright (c) 2023 shadcn
+Tokens: the "neutral" base color (https://ui.shadcn.com/r/colors/neutral.json), new-york v4 component styles.
+
+Ant Design — https://github.com/ant-design/ant-design
+MIT License, Copyright (c) 2015-present Ant UED
+Tokens: Ant Design 5 seed tokens and @ant-design/colors 7 palettes.
+
+Icons, used when FilamentThemes::icons() is enabled:
+- Tabler Icons — https://github.com/tabler/tabler-icons — MIT, Copyright (c) 2020-2026 Paweł Kuna,
+  through secondnetwork/blade-tabler-icons (MIT, Copyright (c) secondnetwork).
+- Lucide — https://github.com/lucide-icons/lucide — ISC, Copyright (c) 2026 Lucide Icons and Contributors
+  (icons derived from Feather: MIT),
+  through mallardduck/blade-lucide-icons (MIT).
+- Ant Design Icons — https://github.com/ant-design/ant-design-icons — MIT, Copyright (c) 2018-present Ant UED,
+  through codeat3/blade-ant-design-icons (MIT).
+
+Font, used by the shadcn/ui preset when the panel sets none (loaded from Bunny Fonts, not bundled):
+- Geist — https://github.com/vercel/geist-font — SIL Open Font License 1.1, Copyright (c) 2023 Vercel,
+  in collaboration with basement.studio.
+
+This project is not affiliated with, sponsored or endorsed by Tabler, shadcn or Ant Group. Tabler, shadcn/ui and
+Ant Design are trademarks of their respective owners, used only to describe which design system each preset follows.

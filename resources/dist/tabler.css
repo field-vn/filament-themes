@@ -1,0 +1,371 @@
+/*!
+ * Filament Themes | preset: Tabler | MIT | field-vn/filament-themes
+ * Visual language after Tabler (https://tabler.io, MIT, "slate" theme base, @tabler/core 1.6).
+ * Tokens only: the structure lives in core.css.
+ */
+
+@layer components {
+    :root {
+        --radius-sm: 4px;
+        --radius-md: 4px;
+        --radius-lg: 6px;
+        --radius-xl: 8px;
+        --radius-2xl: 8px;
+
+        --ft-body-bg: color-mix(in oklab, var(--gray-100) 55%, var(--gray-50));
+        --ft-surface: #fff;
+        --ft-surface-secondary: var(--gray-50);
+        --ft-text-secondary: var(--gray-500);
+        --ft-border: color-mix(in oklab, var(--gray-900) 12%, transparent);
+        --ft-border-input: color-mix(in oklab, var(--gray-900) 16%, transparent);
+        --ft-shadow-card: 0 0 #0000; /* Tabler cards are flat: border only */
+        --ft-shadow-input: 0 1px 1px 0 color-mix(in oklab, var(--gray-900) 6%, transparent);
+        --ft-shadow-overlay:
+            0 16px 24px 2px color-mix(in oklab, var(--gray-900) 7%, transparent),
+            0 6px 30px 5px color-mix(in oklab, var(--gray-900) 6%, transparent),
+            0 8px 10px -5px color-mix(in oklab, var(--gray-900) 10%, transparent);
+        --ft-focus-border: color-mix(in oklab, var(--primary-500) 55%, #fff);
+        --ft-focus-ring: color-mix(in oklab, var(--primary-500) 25%, transparent);
+        --ft-focus-width: 0.25rem;
+        --ft-input-bg: var(--ft-surface);
+        --ft-menu-hover-bg: color-mix(in oklab, var(--primary-500) 6%, transparent);
+
+        /* Density and type */
+        --ft-topbar-height: 3.5rem;
+        --ft-navbar-height: 3.5rem;
+        --ft-page-gap: 1.25rem;
+        --ft-page-header-padding: 1.25rem 1.5rem;
+        --ft-field-gap: 1rem;
+        --ft-simple-padding: 2.5rem;
+        --ft-heading-size: 1.25rem;
+        --ft-heading-line-height: 1.75rem;
+        --ft-heading-weight: 600;
+        --ft-heading-tracking: normal;
+
+        /* Small labels: sidebar groups, breadcrumbs ("pretitle"), stat labels */
+        --ft-label-size: 0.6875rem;
+        --ft-label-line-height: 1rem;
+        --ft-label-weight: 600;
+        --ft-label-tracking: 0.04em;
+        --ft-label-transform: uppercase;
+
+        /* Cards */
+        --ft-card-header-padding: 1rem 1.25rem;
+        --ft-card-padding: 1.25rem;
+        --ft-card-footer-padding: 0.75rem 1.25rem;
+
+        /* Tables */
+        --ft-table-toolbar-py: 0.75rem;
+        --ft-table-cell-py: 0.75rem;
+        --ft-table-head-py: 0.5rem;
+        --ft-table-head-bg: var(--ft-surface-secondary);
+        --ft-table-head-color: var(--ft-text-secondary);
+        --ft-table-head-color-active: var(--gray-700);
+        --ft-table-head-size: 0.75rem;
+        --ft-table-head-line-height: 1rem;
+        --ft-table-head-weight: 500;
+        --ft-table-head-tracking: 0.04em;
+        --ft-table-head-transform: uppercase;
+        --ft-table-row-hover: color-mix(in oklab, var(--primary-500) 4%, transparent);
+        --ft-table-text: var(--gray-700);
+        --ft-card-title-weight: 500;
+        --ft-stat-value-weight: 600;
+
+        /* Controls (preview.tabler.io/buttons.html, form-elements.html): 40px buttons and inputs, 20px checks */
+        --ft-btn-weight: 500;
+        --ft-btn-padding: 0.625rem 1rem;
+        --ft-btn-line-height: 1.25rem;
+        --ft-switch-width: 2rem;
+        --ft-switch-height: 1.25rem;
+        --ft-switch-border: 2px;
+        --ft-switch-knob: 1rem;
+        --ft-switch-shift: 0.75rem;
+        --ft-switch-off-bg: var(--gray-300);
+        --ft-upload-bg: var(--ft-surface);
+        --ft-upload-hover-border: var(--primary-500);
+
+        /* Overlays: backdrop gray-900 at 32%; tooltips inverted at 90% */
+        --ft-overlay: color-mix(in oklab, var(--gray-900) 32%, transparent);
+        --ft-tooltip-bg: color-mix(in oklab, var(--gray-900) 90%, transparent);
+        --ft-tooltip-text: #fff;
+        --ft-tooltip-size: 0.765625rem;
+        --ft-tooltip-line-height: 1.125rem;
+        --ft-tooltip-padding: 0.25rem 0.5rem;
+        --ft-tooltip-radius: var(--radius-lg);
+        --ft-tooltip-shadow: none;
+
+        /* Sidebar: light (Tabler "vertical"); ->darkSidebar() switches to the dark set below */
+        --ft-sidebar-logo-inset: 1.5rem;
+        --ft-sidebar-nav-padding: 1rem 0.75rem;
+        --ft-sidebar-group-gap: 1.25rem;
+        --ft-sidebar-group-label-padding: 0.25rem 0.75rem;
+        --ft-nav-item-padding: 0.5rem 0.75rem;
+        --ft-nav-item-radius: var(--radius-lg);
+        --ft-sidebar-bg: var(--ft-surface);
+        --ft-sidebar-scheme: normal;
+        --ft-sidebar-text: var(--gray-700);
+        --ft-sidebar-text-muted: var(--gray-500);
+        --ft-sidebar-text-active: var(--gray-950);
+        --ft-sidebar-hover-bg: color-mix(in oklab, var(--gray-500) 7%, transparent);
+        --ft-sidebar-active-bg: color-mix(in oklab, var(--gray-500) 12%, transparent);
+        --ft-sidebar-divider: var(--ft-border);
+        --ft-sidebar-accent: transparent;
+    }
+
+    .dark {
+        --ft-body-bg: var(--gray-900);
+        --ft-surface: color-mix(in oklab, var(--gray-800) 45%, var(--gray-900));
+        --ft-surface-secondary: rgb(255 255 255 / 0.03);
+        --ft-text-secondary: var(--gray-400);
+        --ft-border: rgb(128 150 172 / 0.18);
+        --ft-border-input: rgb(128 150 172 / 0.26);
+        --ft-shadow-card: 0 0 #0000;
+        --ft-shadow-input: 0 0 #0000;
+        --ft-shadow-overlay: 0 16px 32px 0 rgb(0 0 0 / 0.35);
+        --ft-focus-border: color-mix(in oklab, var(--primary-400) 70%, transparent);
+        --ft-focus-ring: color-mix(in oklab, var(--primary-400) 25%, transparent);
+        --ft-input-bg: rgb(255 255 255 / 0.03);
+        --ft-table-head-color-active: var(--gray-200);
+        --ft-table-text: var(--gray-300);
+        --ft-switch-off-bg: rgb(255 255 255 / 0.25);
+        --ft-upload-bg: transparent;
+        --ft-upload-hover-border: var(--primary-400);
+        --ft-overlay: rgb(0 0 0 / 0.32);
+        --ft-tooltip-bg: color-mix(in oklab, var(--gray-100) 90%, transparent);
+        --ft-tooltip-text: var(--gray-900);
+
+        --ft-sidebar-text: var(--gray-300);
+        --ft-sidebar-text-muted: var(--gray-400);
+        --ft-sidebar-text-active: #fff;
+        --ft-sidebar-hover-bg: rgb(255 255 255 / 0.04);
+        --ft-sidebar-active-bg: rgb(255 255 255 / 0.07);
+    }
+
+    /* ->darkSidebar(): Tabler's dark vertical navbar. ->darkSidebar('#1d334f') also sets --ft-sidebar-bg. */
+    :root[data-ft-sidebar='dark'] {
+        --ft-sidebar-bg: var(--gray-800);
+        --ft-sidebar-scheme: dark;
+        --ft-sidebar-text: rgb(255 255 255 / 0.7);
+        --ft-sidebar-text-muted: rgb(255 255 255 / 0.45);
+        --ft-sidebar-text-active: #fff;
+        --ft-sidebar-hover-bg: rgb(255 255 255 / 0.05);
+        --ft-sidebar-active-bg: rgb(255 255 255 / 0.08);
+        --ft-sidebar-divider: rgb(255 255 255 / 0.08);
+        --ft-sidebar-accent: var(--primary-400);
+    }
+
+    .dark[data-ft-sidebar='dark'] {
+        --ft-sidebar-bg: color-mix(in oklab, var(--gray-950) 55%, var(--gray-900));
+        --ft-sidebar-divider: var(--ft-border);
+    }
+
+    /* Tables (preview.tabler.io/tables.html): link actions are plain text ("Edit"), no icon. */
+    .fi-ta-actions .fi-link > .fi-icon {
+        display: none;
+    }
+
+    /* Callouts = Tabler alerts: tinted fill, tinted border, text and icon in the alert color. */
+    .fi-callout {
+        border-radius: var(--radius-lg);
+        padding: 0.75rem 1rem;
+    }
+
+    .fi-callout.fi-color {
+        background-color: color-mix(in oklab, var(--color-500) 8%, var(--ft-surface));
+        --tw-ring-color: color-mix(in oklab, var(--color-500) 22%, transparent);
+    }
+
+    .fi-callout.fi-color .fi-callout-icon,
+    .fi-callout.fi-color .fi-callout-heading,
+    .fi-callout.fi-color .fi-callout-description {
+        color: var(--color-700);
+    }
+
+    .dark .fi-callout.fi-color .fi-callout-icon,
+    .dark .fi-callout.fi-color .fi-callout-heading,
+    .dark .fi-callout.fi-color .fi-callout-description {
+        color: var(--color-300);
+    }
+
+    /* Buttons: solid colors get Tabler's 1px darker edge and top highlight. */
+    .fi-btn.fi-color:not(.fi-outlined):not(label) {
+        --tw-inset-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.2), inset 0 -1px 0 0 rgb(0 0 0 / 0.04);
+        --tw-ring-shadow: 0 0 0 1px rgb(0 0 0 / 0.08);
+    }
+
+    /* Button sizes (buttons.html): btn-sm 32px / 12px, btn-lg 48px / 16px, btn-xl 56px / 20px; xs sits under sm. */
+    .fi-btn.fi-size-xs {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .fi-btn.fi-size-sm {
+        padding: 0.5rem 0.8125rem;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .fi-btn.fi-size-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        border-radius: var(--radius-xl);
+    }
+
+    .fi-btn.fi-size-xl {
+        padding: 0.75rem 1.75rem;
+        font-size: 1.25rem;
+        line-height: 2rem;
+        border-radius: var(--radius-xl);
+    }
+
+    /* Inputs and selects: 40px, the height of a button. */
+    .fi-input-wrp .fi-input,
+    .fi-input-wrp select.fi-select-input {
+        padding-block: 0.5rem;
+    }
+
+    .fi-select-input .fi-select-input-btn {
+        min-height: 2.5rem;
+        padding-block: 0.5rem;
+    }
+
+    input[type='checkbox'].fi-checkbox-input,
+    input[type='radio'].fi-radio-input {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    input[type='checkbox'].fi-checkbox-input {
+        border-radius: var(--radius-lg);
+    }
+
+    /* Modal (preview.tabler.io/modals.html): a 56px header bar over a rule, a faint footer strip over a rule, and
+       Cancel on the far left. */
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window:not(.fi-align-center) > .fi-modal-header {
+        min-height: 3.5rem;
+        align-items: center;
+        padding-block: 1rem;
+        padding-inline: 1.5rem 3.5rem;
+        border-bottom: 1px solid var(--ft-border);
+    }
+
+    /* No content: the header text sits right on the footer strip, so it keeps its own bottom padding. */
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window:not(.fi-modal-window-has-content) > .fi-modal-header.fi-modal-header {
+        padding-bottom: 1.5rem;
+        border-bottom-width: 0;
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window.fi-modal-window .fi-modal-footer.fi-modal-footer {
+        margin-top: 0;
+        padding-block: 0.75rem;
+        border-top: 1px solid var(--ft-border);
+        background-color: var(--ft-surface-secondary);
+        border-end-start-radius: inherit;
+        border-end-end-radius: inherit;
+    }
+
+    /* The cancel action is the button that closes the modal (x-on:click="close()"), wherever it sits in the list. */
+    .fi-modal-footer:is(.fi-align-end, .fi-align-right) .fi-modal-footer-actions > [x-on\:click^='close']:not(:first-child) {
+        margin-inline-end: auto;
+    }
+
+    /* Confirmation (modal-danger): a 2px status bar on top, a large plain icon, two full-width buttons. */
+    .fi-modal-window.fi-align-center::before {
+        content: '';
+        position: absolute;
+        inset-inline: 0;
+        top: 0;
+        height: 2px;
+        border-start-start-radius: inherit;
+        border-start-end-radius: inherit;
+        background-color: var(--ft-status, transparent);
+    }
+
+    .fi-modal-window.fi-align-center:has(.fi-modal-icon-bg.fi-color-primary) { --ft-status: var(--primary-600); }
+    .fi-modal-window.fi-align-center:has(.fi-modal-icon-bg.fi-color-danger) { --ft-status: var(--danger-600); }
+    .fi-modal-window.fi-align-center:has(.fi-modal-icon-bg.fi-color-warning) { --ft-status: var(--warning-500); }
+    .fi-modal-window.fi-align-center:has(.fi-modal-icon-bg.fi-color-success) { --ft-status: var(--success-600); }
+    .fi-modal-window.fi-align-center:has(.fi-modal-icon-bg.fi-color-info) { --ft-status: var(--info-600); }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window.fi-align-center .fi-modal-icon-ctn {
+        margin-bottom: 0.5rem;
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window.fi-align-center .fi-modal-icon-bg.fi-modal-icon-bg {
+        padding: 0;
+        background-color: transparent;
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window.fi-align-center .fi-modal-icon-bg > .fi-icon {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    /* Toast (preview.tabler.io/toasts.html): radius 6, translucent border, a light shadow. */
+    .fi-no-notification:not(.fi-inline) {
+        border-radius: var(--radius-lg);
+        --tw-shadow: 0 2px 4px 0 color-mix(in oklab, var(--gray-900) 4%, transparent);
+    }
+
+    .fi-no-notification.fi-color {
+        background-color: color-mix(in oklab, var(--color-500) 8%, var(--ft-surface));
+    }
+
+    /* Dropdown: full-width items (0.5rem 0.75rem) in a list padded 0.25rem top and bottom. */
+    .fi-dropdown-list {
+        gap: 0;
+        padding: 0.25rem 0;
+    }
+
+    .fi-dropdown-list-item {
+        padding: 0.5rem 0.75rem;
+        border-radius: 0;
+    }
+
+    /* Empty state (preview.tabler.io/empty.html): a large plain icon, a 1.25rem title. */
+    .fi-empty-state .fi-empty-state-icon-bg,
+    .fi-empty-state .fi-empty-state-icon-bg.fi-color,
+    .fi-ta-empty-state .fi-ta-empty-state-icon-bg {
+        margin-bottom: 1rem;
+        padding: 0;
+        background-color: transparent;
+    }
+
+    .fi-empty-state .fi-empty-state-icon-bg .fi-icon,
+    .fi-ta-empty-state .fi-ta-empty-state-icon-bg .fi-icon {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .fi-empty-state .fi-empty-state-heading,
+    .fi-ta-empty-state .fi-ta-empty-state-heading {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+
+    .fi-empty-state .fi-empty-state-description,
+    .fi-ta-empty-state .fi-ta-empty-state-description {
+        margin-top: 0.5rem;
+    }
+
+}
+
+/* Toggle buttons are colored through --bg / --text set by utility classes: overriding them takes the same layer. */
+@layer utilities {
+    /* Selected = Tabler's form-selectgroup: border and text in the color on a light tint, not a filled button. */
+    .fi-fo-toggle-buttons input:checked + label.fi-btn.fi-color {
+        --bg: color-mix(in oklab, var(--color-500) 6%, var(--ft-surface));
+        --hover-bg: color-mix(in oklab, var(--color-500) 10%, var(--ft-surface));
+        --text: var(--color-600);
+        --hover-text: var(--color-600);
+        --dark-bg: color-mix(in oklab, var(--color-400) 12%, var(--ft-surface));
+        --dark-hover-bg: color-mix(in oklab, var(--color-400) 16%, var(--ft-surface));
+        --dark-text: var(--color-400);
+        --dark-hover-text: var(--color-400);
+        --tw-ring-shadow: 0 0 0 1px var(--color-500);
+    }
+}
