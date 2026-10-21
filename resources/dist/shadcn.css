@@ -1,0 +1,592 @@
+/*!
+ * Filament Themes | preset: shadcn/ui | MIT | field-vn/filament-themes
+ * Visual language after shadcn/ui (https://ui.shadcn.com, MIT): "neutral" base color, new-york v4 components,
+ * the dashboard-01 / sidebar "inset" layout. Tokens from ui.shadcn.com/r/colors/neutral.json.
+ */
+
+@layer components {
+    :root {
+        /* --radius 0.625rem: controls rounded-md, cards rounded-xl */
+        --radius-sm: 0.375rem;
+        --radius-md: 0.5rem;
+        --radius-lg: 0.5rem;
+        --radius-xl: 0.875rem;
+        --radius-2xl: 1.125rem;
+
+        --ft-body-bg: oklch(0.985 0 0); /* --sidebar: the frame around the inset content */
+        --ft-surface: oklch(1 0 0); /* --background, --card */
+        --ft-surface-secondary: oklch(0.97 0 0); /* --muted */
+        --ft-text-secondary: oklch(0.556 0 0); /* --muted-foreground */
+        --ft-border: oklch(0.922 0 0); /* --border */
+        --ft-border-input: oklch(0.922 0 0); /* --input */
+        --ft-shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); /* shadow-sm */
+        --ft-shadow-input: 0 1px 2px 0 rgb(0 0 0 / 0.05); /* shadow-xs */
+        --ft-shadow-overlay: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-md */
+        --ft-focus-border: oklch(0.708 0 0); /* --ring */
+        --ft-focus-ring: oklch(0.708 0 0 / 0.5); /* ring-ring/50 */
+        --ft-focus-width: 3px;
+        --ft-input-bg: transparent;
+        --ft-menu-hover-bg: oklch(0.97 0 0); /* --accent */
+
+        --ft-topbar-height: 3rem;
+        --ft-navbar-height: 3rem;
+        --ft-page-gap: 1.5rem;
+        --ft-page-header-padding: 1.5rem 1.5rem;
+        --ft-field-gap: 1.5rem;
+        --ft-simple-padding: 1.5rem;
+        --ft-heading-size: 1.5rem;
+        --ft-heading-line-height: 2rem;
+        --ft-heading-weight: 600;
+        --ft-heading-tracking: -0.025em;
+
+        /* SidebarGroupLabel: text-xs font-medium, sidebar-foreground/70 */
+        --ft-label-size: 0.75rem;
+        --ft-label-line-height: 1rem;
+        --ft-label-weight: 500;
+        --ft-label-tracking: normal;
+        --ft-label-transform: none;
+
+        /* Card: py-6 gap-6, header px-6 */
+        --ft-card-header-padding: 1.5rem 1.5rem 0;
+        --ft-card-padding: 1.5rem;
+        --ft-card-footer-padding: 1rem 1.5rem;
+
+        /* TableHead: h-10 px-2 font-medium text-foreground; TableCell p-2 (examples/tasks) */
+        --ft-table-toolbar-py: 0.75rem;
+        --ft-table-cell-py: 0.5rem;
+        --ft-table-head-py: 0.625rem;
+        --ft-table-head-bg: transparent;
+        --ft-table-head-color: oklch(0.145 0 0);
+        --ft-table-head-color-active: oklch(0.145 0 0);
+        --ft-table-head-size: 0.875rem;
+        --ft-table-head-line-height: 1.25rem;
+        --ft-table-head-weight: 500;
+        --ft-table-head-tracking: normal;
+        --ft-table-head-transform: none;
+        --ft-table-row-hover: oklch(0.97 0 0 / 0.5); /* hover:bg-muted/50 */
+        --ft-table-text: oklch(0.145 0 0);
+        --ft-card-title-weight: 600;
+        --ft-stat-value-weight: 600;
+
+        /* Button h-9 px-4 font-medium; Switch h-[1.15rem] w-8; Tooltip bg-primary text-xs px-3 py-1.5 rounded-md */
+        --ft-btn-weight: 500;
+        --ft-btn-padding: 0.5rem 1rem;
+        --ft-btn-line-height: 1.25rem;
+        --ft-switch-width: 2rem;
+        --ft-switch-height: 1.15rem;
+        --ft-switch-border: 1px;
+        --ft-switch-knob: 1rem;
+        --ft-switch-shift: 0.875rem;
+        --ft-switch-off-bg: oklch(0.922 0 0); /* --input */
+        --ft-upload-bg: transparent;
+        --ft-upload-hover-border: oklch(0.708 0 0); /* --ring */
+        --ft-overlay: rgb(0 0 0 / 0.5); /* bg-black/50 */
+        --ft-tooltip-bg: oklch(0.205 0 0);
+        --ft-tooltip-text: oklch(0.985 0 0);
+        --ft-tooltip-size: 0.75rem;
+        --ft-tooltip-line-height: 1rem;
+        --ft-tooltip-padding: 0.375rem 0.75rem;
+        --ft-tooltip-radius: var(--radius-md);
+        --ft-tooltip-shadow: none;
+
+        /* Sidebar: bg-sidebar, menu buttons h-8 px-2 rounded-md, active bg-sidebar-accent */
+        --ft-sidebar-logo-inset: 1rem;
+        --ft-sidebar-nav-padding: 0.5rem;
+        --ft-sidebar-group-gap: 0.75rem;
+        --ft-sidebar-group-label-padding: 0.5rem;
+        --ft-nav-item-padding: 0.375rem 0.5rem;
+        --ft-nav-item-radius: var(--radius-md);
+        --ft-sidebar-bg: oklch(0.985 0 0);
+        --ft-sidebar-scheme: normal;
+        --ft-sidebar-text: oklch(0.145 0 0);
+        --ft-sidebar-text-muted: oklch(0.145 0 0 / 0.7);
+        --ft-sidebar-text-active: oklch(0.205 0 0);
+        --ft-sidebar-hover-bg: oklch(0.97 0 0);
+        --ft-sidebar-active-bg: oklch(0.97 0 0);
+        --ft-sidebar-divider: oklch(0.922 0 0);
+        --ft-sidebar-accent: transparent;
+    }
+
+    .dark {
+        --ft-body-bg: oklch(0.205 0 0);
+        --ft-surface: oklch(0.145 0 0);
+        --ft-surface-secondary: oklch(0.269 0 0);
+        --ft-text-secondary: oklch(0.708 0 0);
+        --ft-border: oklch(1 0 0 / 10%);
+        --ft-border-input: oklch(1 0 0 / 15%);
+        --ft-shadow-card: 0 0 #0000;
+        --ft-shadow-input: 0 0 #0000;
+        --ft-shadow-overlay: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+        --ft-focus-border: oklch(0.556 0 0);
+        --ft-focus-ring: oklch(0.556 0 0 / 0.5);
+        --ft-input-bg: oklch(1 0 0 / 4.5%); /* dark:bg-input/30 */
+        --ft-menu-hover-bg: oklch(0.269 0 0);
+        --ft-table-head-bg: transparent;
+        --ft-table-head-color: oklch(0.985 0 0);
+        --ft-table-head-color-active: oklch(0.985 0 0);
+        --ft-table-row-hover: oklch(0.269 0 0 / 0.5);
+        --ft-table-text: oklch(0.985 0 0);
+        --ft-switch-off-bg: oklch(1 0 0 / 15%);
+        --ft-upload-hover-border: oklch(0.556 0 0);
+        --ft-tooltip-bg: oklch(0.922 0 0);
+        --ft-tooltip-text: oklch(0.205 0 0);
+
+        --ft-sidebar-bg: oklch(0.205 0 0);
+        --ft-sidebar-text: oklch(0.985 0 0);
+        --ft-sidebar-text-muted: oklch(0.985 0 0 / 0.7);
+        --ft-sidebar-text-active: oklch(0.985 0 0);
+        --ft-sidebar-hover-bg: oklch(0.269 0 0);
+        --ft-sidebar-active-bg: oklch(0.269 0 0);
+        --ft-sidebar-divider: oklch(1 0 0 / 10%);
+    }
+
+    /* ->darkSidebar(): shadcn's sidebar tokens in dark mode, kept dark in both modes. */
+    :root[data-ft-sidebar='dark'] {
+        --ft-sidebar-bg: oklch(0.205 0 0);
+        --ft-sidebar-scheme: dark;
+        --ft-sidebar-text: oklch(0.985 0 0);
+        --ft-sidebar-text-muted: oklch(0.985 0 0 / 0.7);
+        --ft-sidebar-text-active: oklch(0.985 0 0);
+        --ft-sidebar-hover-bg: oklch(0.269 0 0);
+        --ft-sidebar-active-bg: oklch(0.269 0 0);
+        --ft-sidebar-divider: oklch(1 0 0 / 10%);
+        --ft-sidebar-accent: transparent;
+    }
+
+    /* Layout: the sidebar sits on the page frame; the content is an inset card (SidebarInset, variant "inset"). */
+
+    @media (min-width: 64rem) {
+        .fi-sidebar {
+            border-inline-end-color: transparent;
+        }
+
+        .fi-body:not(.fi-body-has-topbar) .fi-main-ctn {
+            min-height: calc(100dvh - 1rem);
+            margin: 0.5rem;
+            margin-inline-start: 0;
+            border-radius: var(--radius-xl);
+            background-color: var(--ft-surface);
+            box-shadow: var(--ft-shadow-card);
+        }
+
+        .dark .fi-body:not(.fi-body-has-topbar) .fi-main-ctn {
+            box-shadow: 0 0 0 1px var(--ft-border);
+        }
+    }
+
+    /* Sidebar menu: 16px icons, gap-2, the active item in font-medium on bg-sidebar-accent. */
+
+    .fi-sidebar .fi-sidebar-item-btn,
+    .fi-sidebar .fi-sidebar-group-dropdown-trigger-btn {
+        column-gap: 0.5rem;
+    }
+
+    .fi-sidebar .fi-sidebar-item-btn > .fi-icon,
+    .fi-sidebar .fi-sidebar-group-dropdown-trigger-btn > .fi-icon {
+        width: 1rem;
+        height: 1rem;
+        color: var(--ft-sidebar-text);
+    }
+
+    .fi-sidebar .fi-sidebar-item-label {
+        font-weight: 400;
+    }
+
+    .fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-sidebar-item-label {
+        font-weight: 500;
+    }
+
+    /* Breadcrumb: text-sm muted-foreground, not a pretitle. */
+    .fi-breadcrumbs ol li {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-weight: 400;
+    }
+
+    /* Card: no rule between header and content; title leading-none font-semibold, description muted. */
+    .fi-section:not(.fi-section-not-contained):not(.fi-aside).fi-section-has-header:not(.fi-collapsed) > .fi-section-content-ctn {
+        border-top-width: 0;
+    }
+
+    /* A collapsed card is its header alone: give it back the bottom padding. */
+    .fi-section:not(.fi-section-not-contained):not(.fi-aside).fi-collapsed > .fi-section-header {
+        padding-bottom: 1.5rem;
+    }
+
+
+    /* Checkbox / toggle: primary, inverted in dark mode with a dark check mark. */
+    .dark input[type='checkbox'].fi-checkbox-input:checked {
+        background-color: var(--primary-200);
+        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%23171717' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L6.5 9.086l4.293-4.293a1 1 0 0 1 1.414 0'/%3E%3C/svg%3E");
+    }
+
+    .dark .fi-toggle.fi-color.fi-toggle-on {
+        background-color: var(--primary-200);
+    }
+
+    /* Badge: outline variant (rounded-md border px-2 py-0.5 text-xs font-medium), the color kept in the text. */
+    .fi-badge.fi-color {
+        background-color: transparent;
+        --tw-ring-shadow: 0 0 0 1px var(--ft-border);
+        box-shadow: var(--tw-ring-shadow);
+        border-radius: var(--radius-md);
+    }
+
+    .dark .fi-badge.fi-color {
+        background-color: transparent;
+    }
+
+    /* Tabs: TabsList bg-muted rounded-lg p-[3px]; the active trigger bg-background shadow-sm, no underline. */
+    .fi-tabs:not(.fi-vertical) {
+        width: fit-content;
+        column-gap: 0;
+        padding: 3px;
+        border-radius: var(--radius-lg);
+        background-color: var(--ft-surface-secondary);
+        --tw-ring-color: transparent;
+        --tw-shadow: 0 0 #0000;
+    }
+
+    .fi-tabs.fi-contained:not(.fi-vertical) {
+        margin: 1rem 1.5rem 0;
+        border-bottom-width: 0;
+    }
+
+    .fi-tabs-item {
+        padding: 0.25rem 0.75rem;
+        border-radius: calc(var(--radius-lg) - 2px);
+    }
+
+    .fi-tabs-item .fi-tabs-item-label {
+        color: var(--ft-text-secondary);
+    }
+
+    .fi-tabs-item.fi-active {
+        background-color: var(--ft-surface);
+        box-shadow: var(--ft-shadow-input);
+    }
+
+    .dark .fi-tabs-item.fi-active {
+        background-color: oklch(0.145 0 0);
+    }
+
+    .fi-tabs-item.fi-active .fi-tabs-item-label,
+    .fi-tabs-item.fi-active > .fi-icon {
+        color: var(--gray-950);
+    }
+
+    .dark .fi-tabs-item.fi-active .fi-tabs-item-label,
+    .dark .fi-tabs-item.fi-active > .fi-icon {
+        color: #fff;
+    }
+
+    .fi-tabs-item.fi-active::after {
+        display: none;
+    }
+
+    /* Pagination: ghost links; the current page is an outline button. */
+    .fi-pagination .fi-pagination-item.fi-active .fi-pagination-item-btn {
+        background-color: var(--ft-surface);
+        box-shadow: 0 0 0 1px var(--ft-border), var(--ft-shadow-input);
+    }
+
+    .fi-pagination .fi-pagination-item.fi-active .fi-pagination-item-label {
+        color: var(--gray-950);
+    }
+
+    .dark .fi-pagination .fi-pagination-item.fi-active .fi-pagination-item-label {
+        color: #fff;
+    }
+
+    .fi-pagination .fi-pagination-item-btn:enabled:hover {
+        background-color: var(--ft-menu-hover-bg);
+    }
+
+    /* Dropdown items: rounded-sm px-2 py-1.5 inside a p-1 panel. */
+    .fi-dropdown-list {
+        padding: 0.25rem;
+    }
+
+    .fi-dropdown-list-item {
+        border-radius: var(--radius-sm);
+    }
+
+    /* Data table (ui.shadcn.com/examples/tasks): no card; the toolbar sits above a bordered table, search on the
+       left (h-8, 250px), filter buttons outlined (dashed), pagination below. */
+    .fi-ta-ctn {
+        overflow: visible;
+        border-radius: 0;
+        background-color: transparent;
+        --tw-ring-color: transparent;
+        --tw-shadow: 0 0 #0000;
+    }
+
+    .fi-ta-ctn .fi-ta-header,
+    .fi-ta-ctn .fi-ta-header-toolbar {
+        padding: 0 0 1rem;
+        border-bottom-width: 0;
+    }
+
+    .fi-ta-ctn .fi-ta-header-toolbar > :nth-child(2) {
+        flex: 1;
+        margin-inline-start: 0;
+    }
+
+    .fi-ta-ctn .fi-ta-header-toolbar .fi-ta-search-field {
+        order: -1;
+        margin-inline-end: auto;
+    }
+
+    .fi-ta-ctn .fi-ta-search-field .fi-input-wrp {
+        width: 16rem;
+    }
+
+    .fi-ta-ctn .fi-ta-search-field .fi-input {
+        padding-block: 0.25rem;
+    }
+
+    .fi-ta-ctn .fi-ta-header-toolbar .fi-icon-btn {
+        width: 2rem;
+        height: 2rem;
+        border-radius: var(--radius-md);
+        background-color: var(--ft-surface);
+        box-shadow: inset 0 0 0 1px var(--ft-border-input), var(--ft-shadow-input);
+    }
+
+    .fi-ta-ctn .fi-ta-header-toolbar .fi-ta-filters-dropdown .fi-icon-btn {
+        box-shadow: none;
+        border: 1px dashed var(--ft-border-input);
+    }
+
+    .fi-ta-ctn .fi-ta-content-ctn {
+        border: 1px solid var(--ft-border);
+        border-radius: var(--radius-lg);
+        background-color: var(--ft-surface);
+    }
+
+    .fi-ta-ctn .fi-pagination {
+        padding: 1rem 0 0;
+        border-top-width: 0;
+    }
+
+    .fi-ta-ctn .fi-ta-selection-indicator {
+        padding: 0 0 0.75rem;
+        border-bottom-width: 0;
+        background-color: transparent;
+    }
+
+    .fi-ta-ctn .fi-ta-selection-indicator > :first-child {
+        color: var(--ft-text-secondary);
+        font-weight: 400;
+    }
+
+    /* Row actions: foreground text, muted icons (shadcn has no colored links). */
+    .fi-ta-actions .fi-link.fi-color-primary {
+        color: var(--gray-950);
+    }
+
+    .dark .fi-ta-actions .fi-link.fi-color-primary {
+        color: #fff;
+    }
+
+    .fi-ta-actions .fi-link > .fi-icon {
+        color: var(--ft-text-secondary);
+    }
+
+    /* Alert: a plain card (rounded-lg border px-4 py-3); only the icon is colored, destructive also tints text. */
+    .fi-callout {
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius-lg);
+    }
+
+    .fi-callout.fi-color {
+        background-color: var(--ft-surface);
+        --tw-ring-color: var(--ft-border);
+    }
+
+    .fi-callout.fi-color .fi-callout-icon {
+        color: var(--color-600);
+    }
+
+    .fi-callout.fi-color .fi-callout-description {
+        color: var(--ft-text-secondary);
+    }
+
+    .fi-callout.fi-color-danger .fi-callout-heading,
+    .fi-callout.fi-color-danger .fi-callout-description {
+        color: var(--danger-600);
+    }
+
+    /* Button: sm h-8 px-3, default h-9 px-4, lg h-10 px-6; with an icon (has-[>svg]) px-2.5 / px-3 / px-4. Every
+       button holds a hidden loading icon, which does not count. */
+    .fi-btn.fi-size-sm {
+        padding-inline: 0.75rem;
+        column-gap: 0.375rem;
+    }
+
+    .fi-btn.fi-size-lg {
+        padding-inline: 1.5rem;
+    }
+
+    .fi-btn.fi-size-sm:has(> .fi-icon:not(.fi-loading-indicator)) {
+        padding-inline: 0.625rem;
+    }
+
+    .fi-btn.fi-size-md:has(> .fi-icon:not(.fi-loading-indicator)) {
+        padding-inline: 0.75rem;
+    }
+
+    .fi-btn.fi-size-lg:has(> .fi-icon:not(.fi-loading-indicator)) {
+        padding-inline: 1rem;
+    }
+
+    /* Outline button in dark mode: border-input, as the near-black primary would vanish on the dark page. */
+    .dark .fi-btn.fi-outlined.fi-color-primary {
+        --tw-ring-color: var(--ft-border-input);
+    }
+
+    /* Dialog: rounded-lg border p-6 gap-4 shadow-lg; title text-lg font-semibold; footer gap-2. */
+    .fi-modal:not(.fi-modal-slide-over):not(.fi-width-screen) > .fi-modal-window-ctn > .fi-modal-window {
+        border-radius: 0.625rem;
+    }
+
+    .fi-modal-window {
+        --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window .fi-modal-content {
+        padding-block: 1rem;
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window .fi-modal-heading {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window .fi-modal-footer .fi-modal-footer-actions {
+        gap: 0.5rem;
+    }
+
+    /* AlertDialog with AlertDialogMedia: a size-10 rounded-md tile in the color at 10%, next to the title. */
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window.fi-align-start .fi-modal-header {
+        column-gap: 1rem;
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window .fi-modal-icon-bg.fi-modal-icon-bg {
+        padding: 0.5rem;
+        border-radius: var(--radius-md);
+        background-color: var(--ft-surface-secondary);
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window .fi-modal-icon-bg.fi-modal-icon-bg.fi-color {
+        background-color: color-mix(in oklab, var(--color-500) 10%, transparent);
+    }
+
+    .dark .fi-modal > .fi-modal-window-ctn > .fi-modal-window .fi-modal-icon-bg.fi-modal-icon-bg.fi-color {
+        background-color: color-mix(in oklab, var(--color-500) 20%, transparent);
+    }
+
+    /* Toast (Sonner): rounded-md border, 13px text, a 16px icon, the same white card for every type. */
+    .fi-no-notification:not(.fi-inline) {
+        border-radius: var(--radius-md);
+        --tw-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    }
+
+    .fi-no-notification.fi-color:not(.fi-inline) {
+        background-color: var(--ft-surface);
+        --tw-ring-color: var(--ft-border);
+    }
+
+    .fi-no-notification:not(.fi-inline) {
+        column-gap: 0.5rem;
+    }
+
+    .fi-no-notification .fi-no-notification-icon {
+        width: 1rem;
+        height: 1rem;
+        margin-top: 0.25rem;
+    }
+
+    .fi-no-notification .fi-no-notification-title,
+    .fi-no-notification .fi-no-notification-body {
+        font-size: 0.8125rem;
+    }
+
+    .fi-no-notification.fi-color .fi-no-notification-body {
+        color: var(--ft-text-secondary);
+    }
+
+    /* DropdownMenuItem: px-2 py-1.5, 16px muted icons. */
+    .fi-dropdown-list-item {
+        padding: 0.375rem 0.5rem;
+    }
+
+    .fi-dropdown-list-item > .fi-icon {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    /* Empty: a dashed frame; the icon in a size-10 rounded-lg muted tile; title text-lg font-medium. */
+    .fi-empty-state:not(.fi-empty-state-not-contained) {
+        border: 1px dashed var(--ft-border);
+        background-color: transparent;
+        --tw-ring-shadow: 0 0 #0000;
+        --tw-shadow: 0 0 #0000;
+    }
+
+    .fi-empty-state .fi-empty-state-icon-bg,
+    .fi-empty-state .fi-empty-state-icon-bg.fi-color,
+    .fi-ta-empty-state .fi-ta-empty-state-icon-bg {
+        padding: 0.5rem;
+        border-radius: var(--radius-lg);
+        background-color: var(--ft-surface-secondary);
+    }
+
+    .fi-empty-state .fi-empty-state-icon-bg .fi-icon:not(.fi-color),
+    .fi-ta-empty-state .fi-ta-empty-state-icon-bg .fi-icon {
+        color: var(--ft-table-text);
+    }
+
+    .fi-empty-state .fi-empty-state-heading,
+    .fi-ta-empty-state .fi-ta-empty-state-heading {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        font-weight: 500;
+        letter-spacing: -0.025em;
+    }
+
+    .fi-empty-state .fi-empty-state-description,
+    .fi-ta-empty-state .fi-ta-empty-state-description {
+        line-height: 1.625;
+    }
+
+}
+
+/* Filament sets button colors with utility classes (fi-bg-color-600, dark:fi-text-color-50…), which live in the
+   utilities layer: overriding them takes the same layer. */
+@layer utilities {
+    /* Buttons: primary is black in light mode and inverted (light gray, dark text) in dark mode. */
+    .fi-btn.fi-color-primary:not(.fi-outlined) {
+        --dark-bg: var(--primary-200);
+        --dark-hover-bg: oklch(0.922 0 0 / 0.9);
+        --dark-text: var(--primary-600);
+        --dark-hover-text: var(--primary-600);
+    }
+
+    .fi-btn.fi-color-primary:not(.fi-outlined) > .fi-icon {
+        --dark-text: var(--primary-600);
+    }
+
+    /* ToggleGroup (outline): the pressed item takes bg-accent, not a filled button. */
+    .fi-fo-toggle-buttons input:checked + label.fi-btn.fi-color {
+        --bg: oklch(0.97 0 0);
+        --hover-bg: oklch(0.97 0 0);
+        --text: oklch(0.205 0 0);
+        --hover-text: oklch(0.205 0 0);
+        --dark-bg: oklch(0.269 0 0);
+        --dark-hover-bg: oklch(0.269 0 0);
+        --dark-text: oklch(0.985 0 0);
+        --dark-hover-text: oklch(0.985 0 0);
+        --tw-ring-shadow: 0 0 0 1px var(--ft-border-input);
+    }
+}

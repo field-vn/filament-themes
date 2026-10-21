@@ -1,0 +1,644 @@
+/*!
+ * Filament Themes | preset: Ant Design | MIT | field-vn/filament-themes
+ * Visual language after Ant Design 5 / Ant Design Pro (https://ant.design, MIT): default seed tokens
+ * (colorPrimary #1677ff, borderRadius 6, fontSize 14, system font stack), ProLayout "side" with a dark sider.
+ */
+
+@layer components {
+    :root {
+        --radius-sm: 4px; /* borderRadiusSM: checkbox, tag */
+        --radius-md: 4px;
+        --radius-lg: 6px; /* borderRadius: button, input */
+        --radius-xl: 8px; /* borderRadiusLG: card, modal, dropdown */
+        --radius-2xl: 8px;
+
+        --ft-font-family:
+            -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+            'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+        --ft-body-bg: #f5f5f5; /* colorBgLayout */
+        --ft-surface: #fff; /* colorBgContainer */
+        --ft-surface-secondary: #fafafa; /* colorFillAlter */
+        --ft-text-secondary: rgb(0 0 0 / 0.45); /* colorTextSecondary */
+        --ft-border: #f0f0f0; /* colorBorderSecondary */
+        --ft-border-input: #d9d9d9; /* colorBorder */
+        --ft-shadow-card: 0 0 #0000;
+        --ft-shadow-input: 0 2px 0 rgb(0 0 0 / 0.02); /* default button */
+        --ft-shadow-overlay:
+            0 6px 16px 0 rgb(0 0 0 / 0.08), 0 3px 6px -4px rgb(0 0 0 / 0.12), 0 9px 28px 8px rgb(0 0 0 / 0.05);
+        --ft-focus-border: var(--primary-600);
+        --ft-focus-ring: rgb(5 145 255 / 0.1); /* controlOutline */
+        --ft-focus-width: 2px;
+        --ft-input-bg: #fff;
+        --ft-menu-hover-bg: rgb(0 0 0 / 0.04); /* controlItemBgHover */
+
+        --ft-topbar-height: 3.5rem; /* ProLayout header 56px */
+        --ft-navbar-height: 3rem;
+        --ft-page-gap: 1.5rem;
+        --ft-page-header-padding: 1rem 1.5rem;
+        --ft-field-gap: 1.5rem; /* Form.Item margin-bottom */
+        --ft-simple-padding: 2rem;
+        --ft-heading-size: 1.25rem; /* PageHeader title */
+        --ft-heading-line-height: 2rem;
+        --ft-heading-weight: 600;
+        --ft-heading-tracking: normal;
+
+        --ft-label-size: 0.875rem;
+        --ft-label-line-height: 1.375rem;
+        --ft-label-weight: 400;
+        --ft-label-tracking: normal;
+        --ft-label-transform: none;
+
+        /* Card: head 56px, 16px/600, body padding 24px */
+        --ft-card-header-padding: 1rem 1.5rem;
+        --ft-card-padding: 1.5rem;
+        --ft-card-footer-padding: 0.75rem 1.5rem;
+
+        /* Table: header #fafafa 600, cells 16px */
+        --ft-table-toolbar-py: 1rem;
+        --ft-table-cell-py: 1rem;
+        --ft-table-head-py: 1rem;
+        --ft-table-head-bg: #fafafa;
+        --ft-table-head-color: rgb(0 0 0 / 0.88);
+        --ft-table-head-color-active: rgb(0 0 0 / 0.88);
+        --ft-table-head-size: 0.875rem;
+        --ft-table-head-line-height: 1.375rem;
+        --ft-table-head-weight: 600;
+        --ft-table-head-tracking: normal;
+        --ft-table-head-transform: none;
+        --ft-table-row-hover: #fafafa;
+        --ft-table-text: rgb(0 0 0 / 0.88);
+        --ft-card-title-weight: 600;
+        --ft-stat-value-weight: 400;
+
+        /* Button 32px (4px 15px, line 22px), regular weight; Switch 44x22; Tooltip colorBgSpotlight */
+        --ft-btn-weight: 400;
+        --ft-btn-padding: 0.3125rem 0.9375rem;
+        --ft-btn-line-height: 1.375rem;
+        --ft-switch-width: 2.75rem;
+        --ft-switch-height: 1.375rem;
+        --ft-switch-border: 2px;
+        --ft-switch-knob: 1.125rem;
+        --ft-switch-shift: 1.375rem;
+        --ft-switch-off-bg: rgb(0 0 0 / 0.25); /* colorTextQuaternary */
+        --ft-upload-bg: #fafafa; /* colorFillAlter */
+        --ft-upload-hover-border: var(--primary-500);
+        --ft-overlay: rgb(0 0 0 / 0.45); /* colorBgMask */
+        --ft-tooltip-bg: rgb(0 0 0 / 0.85);
+        --ft-tooltip-text: #fff;
+        --ft-tooltip-size: 0.875rem;
+        --ft-tooltip-line-height: 1.375rem;
+        --ft-tooltip-padding: 0.375rem 0.5rem;
+        --ft-tooltip-radius: var(--radius-lg);
+        --ft-tooltip-shadow:
+            0 6px 16px 0 rgb(0 0 0 / 0.08), 0 3px 6px -4px rgb(0 0 0 / 0.12), 0 9px 28px 8px rgb(0 0 0 / 0.05);
+
+        /* Menu, light theme (->darkSidebar(false)); the default dark sider is below */
+        --ft-sidebar-logo-inset: 1.5rem;
+        --ft-sidebar-nav-padding: 0.25rem;
+        --ft-sidebar-group-gap: 0.5rem;
+        --ft-sidebar-group-label-padding: 0.5rem 1.25rem;
+        --ft-nav-item-padding: 0.5625rem 1.25rem; /* 40px items */
+        --ft-nav-item-radius: var(--radius-xl);
+        --ft-sidebar-bg: #fff;
+        --ft-sidebar-scheme: normal;
+        --ft-sidebar-text: rgb(0 0 0 / 0.88);
+        --ft-sidebar-text-muted: rgb(0 0 0 / 0.45);
+        --ft-sidebar-text-active: var(--primary-600);
+        --ft-sidebar-hover-bg: rgb(0 0 0 / 0.06);
+        --ft-sidebar-active-bg: var(--primary-50);
+        --ft-sidebar-divider: #f0f0f0;
+        --ft-sidebar-accent: transparent;
+    }
+
+    .dark {
+        /* darkAlgorithm */
+        --ft-body-bg: #000;
+        --ft-surface: #141414;
+        --ft-surface-secondary: rgb(255 255 255 / 0.04);
+        --ft-text-secondary: rgb(255 255 255 / 0.45);
+        --ft-border: #303030;
+        --ft-border-input: #424242;
+        --ft-shadow-input: 0 0 #0000;
+        --ft-shadow-overlay:
+            0 6px 16px 0 rgb(0 0 0 / 0.32), 0 3px 6px -4px rgb(0 0 0 / 0.48), 0 9px 28px 8px rgb(0 0 0 / 0.2);
+        --ft-focus-border: var(--primary-500);
+        --ft-focus-ring: rgb(0 60 180 / 0.15);
+        --ft-input-bg: transparent;
+        --ft-menu-hover-bg: rgb(255 255 255 / 0.08);
+        --ft-table-head-bg: #1d1d1d;
+        --ft-table-head-color: rgb(255 255 255 / 0.85);
+        --ft-table-head-color-active: rgb(255 255 255 / 0.85);
+        --ft-table-row-hover: #262626;
+        --ft-table-text: rgb(255 255 255 / 0.85);
+        --ft-switch-off-bg: rgb(255 255 255 / 0.25);
+        --ft-upload-bg: rgb(255 255 255 / 0.04);
+        --ft-upload-hover-border: var(--primary-400);
+        --ft-tooltip-bg: #424242;
+
+        --ft-sidebar-bg: #141414;
+        --ft-sidebar-text: rgb(255 255 255 / 0.85);
+        --ft-sidebar-text-muted: rgb(255 255 255 / 0.45);
+        --ft-sidebar-text-active: var(--primary-400);
+        --ft-sidebar-hover-bg: rgb(255 255 255 / 0.08);
+        --ft-sidebar-active-bg: #111a2c;
+        --ft-sidebar-divider: #303030;
+    }
+
+    /* Default: Menu theme "dark" on the #001529 sider; the selected item is filled with colorPrimary. */
+    :root[data-ft-sidebar='dark'] {
+        --ft-sidebar-bg: #001529;
+        --ft-sidebar-scheme: dark;
+        --ft-sidebar-text: rgb(255 255 255 / 0.65);
+        --ft-sidebar-text-muted: rgb(255 255 255 / 0.45);
+        --ft-sidebar-text-active: #fff;
+        --ft-sidebar-hover-bg: transparent;
+        --ft-sidebar-active-bg: var(--primary-600);
+        --ft-sidebar-divider: transparent;
+        --ft-sidebar-accent: transparent;
+    }
+
+    .fi-body {
+        font-size: 0.875rem;
+    }
+
+    /* Header: white, 56px, the ProLayout shadow. */
+    .fi-topbar {
+        --tw-shadow: 0 1px 4px rgb(0 21 41 / 0.08);
+    }
+
+    .dark .fi-topbar {
+        --tw-shadow: 0 1px 0 0 var(--ft-border);
+    }
+
+    /* Menu: 16px icons, 10px gap; hover lights the text up on the dark sider. */
+    .fi-sidebar .fi-sidebar-item-btn,
+    .fi-sidebar .fi-sidebar-group-dropdown-trigger-btn {
+        column-gap: 0.625rem;
+    }
+
+    .fi-sidebar .fi-sidebar-item-btn > .fi-icon {
+        width: 1rem;
+        height: 1rem;
+        color: var(--ft-sidebar-text);
+    }
+
+    .fi-sidebar .fi-sidebar-item-label {
+        font-weight: 400;
+    }
+
+    /* Table: thin separators between header cells, selected rows in primary-1. */
+    .fi-ta-header-cell {
+        position: relative;
+    }
+
+    .fi-ta-table > thead > tr > .fi-ta-header-cell:not(:last-child)::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        inset-inline-end: 0;
+        width: 1px;
+        height: 1.6em;
+        background-color: var(--ft-border);
+        translate: 0 -50%;
+    }
+
+    .fi-ta-row.fi-selected {
+        background-color: var(--primary-50);
+    }
+
+    .dark .fi-ta-row.fi-selected {
+        background-color: #111a2c;
+    }
+
+    /* Form.Item label: 14px, regular weight. */
+    .fi-fo-field .fi-fo-field-label-content {
+        font-weight: 400;
+    }
+
+    /* Button sizes: small 24px (0 7px, radius 4), large 40px (7px 15px, 16px text, radius 8); xs and xl extend the
+       scale (20px, 48px). The default 32px goes through --ft-btn-padding. */
+    .fi-btn.fi-size-xs {
+        padding: 0.125rem 0.375rem;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        border-radius: var(--radius-md);
+    }
+
+    .fi-btn.fi-size-sm {
+        padding: 0.0625rem 0.4375rem;
+        line-height: 1.375rem;
+        border-radius: var(--radius-md);
+    }
+
+    .fi-btn.fi-size-lg {
+        padding: 0.5rem 0.9375rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        border-radius: var(--radius-xl);
+    }
+
+    .fi-btn.fi-size-xl {
+        padding: 0.75rem 1.1875rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        border-radius: var(--radius-xl);
+    }
+
+    /* Controls: 32px high. */
+    .fi-input-wrp .fi-input:not(textarea) {
+        padding-block: 0.25rem;
+    }
+
+    .fi-select-input .fi-select-input-btn {
+        min-height: 2rem;
+        padding-block: 0.25rem;
+    }
+
+    .fi-input-wrp {
+        --tw-shadow: 0 0 #0000;
+    }
+
+    .fi-input-wrp:not(.fi-disabled):hover {
+        --tw-ring-color: var(--primary-500); /* colorPrimaryHover */
+    }
+
+    /* Default button: white, colorBorder; hover turns border and text primary. */
+    .fi-btn:not(.fi-color):not(.fi-disabled):not([disabled]):hover {
+        --tw-ring-color: var(--primary-500);
+        background-color: var(--ft-surface);
+        color: var(--primary-500);
+    }
+
+    .fi-btn:not(.fi-color):not(.fi-disabled):not([disabled]):hover > .fi-icon {
+        color: var(--primary-500);
+    }
+
+
+    /* Tag: bordered, light fill, darker text of the same hue. */
+    .fi-badge {
+        border-radius: var(--radius-sm);
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+    }
+
+    .fi-badge.fi-color {
+        background-color: var(--color-50);
+        color: var(--color-700);
+        --tw-ring-shadow: inset 0 0 0 1px var(--color-200);
+        box-shadow: var(--tw-ring-shadow);
+    }
+
+    .dark .fi-badge.fi-color {
+        background-color: color-mix(in oklab, var(--color-500) 15%, transparent);
+        color: var(--color-400);
+        --tw-ring-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-500) 40%, transparent);
+    }
+
+    /* Pagination: the current page is outlined in primary on white. */
+    .fi-pagination .fi-pagination-item.fi-active .fi-pagination-item-btn {
+        background-color: var(--ft-surface);
+        box-shadow: inset 0 0 0 1px var(--primary-600);
+    }
+
+    .fi-pagination .fi-pagination-item.fi-active .fi-pagination-item-label {
+        color: var(--ft-table-text);
+        font-weight: 600;
+    }
+
+    .fi-pagination .fi-pagination-item-btn:enabled:hover {
+        background-color: var(--ft-menu-hover-bg);
+    }
+
+    /* Overlays: no border, radius 8, shadow only; dropdown items rounded 4. */
+    .fi-dropdown-panel,
+    .fi-modal-window {
+        --tw-ring-color: transparent;
+    }
+
+    .fi-dropdown-list {
+        padding: 0.25rem;
+    }
+
+    .fi-dropdown-list-item {
+        border-radius: var(--radius-md);
+    }
+
+    /* Tabs: label in primary when active (ink bar from core.css). */
+    .fi-tabs-item.fi-active .fi-tabs-item-label,
+    .fi-tabs-item.fi-active > .fi-icon {
+        color: var(--primary-600);
+    }
+
+    .dark .fi-tabs-item.fi-active .fi-tabs-item-label,
+    .dark .fi-tabs-item.fi-active > .fi-icon {
+        color: var(--primary-400);
+    }
+
+    .fi-tabs-item.fi-active::after {
+        border-radius: 0;
+    }
+
+    /* ProTable: a borderless white card; toolbar and pagination padded 24px; the bulk-selection bar is an info Alert. */
+    .fi-ta-ctn {
+        --tw-ring-color: transparent;
+    }
+
+    .fi-ta-ctn .fi-ta-header {
+        padding: 1rem 1.5rem 0;
+        border-bottom-width: 0;
+    }
+
+    .fi-ta-ctn .fi-ta-header-toolbar {
+        padding: 1rem 1.5rem;
+        border-bottom-width: 0;
+    }
+
+    .fi-ta-ctn .fi-ta-selection-indicator {
+        margin: 0 1.5rem 1rem;
+        padding: 0.5rem 1.5rem;
+        border: 1px solid var(--primary-200);
+        border-radius: var(--radius-xl);
+        background-color: var(--primary-50);
+    }
+
+    .dark .fi-ta-ctn .fi-ta-selection-indicator {
+        border-color: #15325b;
+        background-color: #111a2c;
+    }
+
+    .fi-ta-ctn .fi-pagination {
+        padding: 1rem 1.5rem;
+        border-top-width: 0;
+    }
+
+    /* Row actions: text links split by a divider ("Edit | Delete"), no icons. */
+    .fi-ta-actions .fi-link > .fi-icon {
+        display: none;
+    }
+
+    .fi-ta-cell .fi-ta-actions {
+        column-gap: 0.5rem;
+    }
+
+    .fi-ta-cell .fi-ta-actions > :not(:first-child) {
+        padding-inline-start: 0.5rem;
+        border-inline-start: 1px solid var(--ft-border);
+    }
+
+    /* Alert: tinted fill and border per type (success #f6ffed / #b7eb8f …), radius 8, text stays neutral. */
+    .fi-callout {
+        padding: 0.5rem 0.75rem;
+        border-radius: var(--radius-xl);
+    }
+
+    .fi-callout:has(.fi-callout-description) {
+        padding: 1.25rem 1.5rem;
+    }
+
+    .fi-callout.fi-color {
+        background-color: var(--color-50);
+        --tw-ring-color: var(--color-200);
+    }
+
+    .dark .fi-callout.fi-color {
+        background-color: color-mix(in oklab, var(--color-500) 12%, transparent);
+        --tw-ring-color: color-mix(in oklab, var(--color-500) 35%, transparent);
+    }
+
+    .fi-callout.fi-color .fi-callout-icon {
+        color: var(--color-600);
+    }
+
+    .fi-callout .fi-callout-heading {
+        font-size: 1rem;
+    }
+
+    .fi-callout.fi-color .fi-callout-description {
+        color: var(--ft-table-text);
+    }
+
+    /* Typography.Link: primary, lighter on hover, never underlined. */
+    .fi-link {
+        font-weight: 400;
+    }
+
+    .fi-link:not(.fi-disabled):not([disabled]):hover {
+        text-decoration-line: none;
+    }
+
+    .fi-link.fi-color-primary:hover {
+        color: var(--primary-500);
+    }
+
+    /* Modal: content padding 20px 24px, title 16px/600, 8px under the title, 12px above the footer, buttons 8px apart. */
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window .fi-modal-header {
+        padding: 1.25rem 1.5rem 0;
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window .fi-modal-content {
+        padding-block: 0.5rem 0.75rem;
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window.fi-modal-window .fi-modal-footer {
+        padding-bottom: 1.25rem;
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window .fi-modal-footer .fi-modal-footer-actions {
+        gap: 0.5rem;
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window .fi-modal-heading {
+        color: var(--ft-table-text);
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window .fi-modal-description {
+        color: var(--ft-table-text);
+    }
+
+    /* Modal.confirm: a plain 22px icon 12px before the title, the text indented under the title. */
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window.fi-align-start .fi-modal-header {
+        column-gap: 0.75rem;
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window.fi-align-start .fi-modal-icon-bg.fi-modal-icon-bg {
+        padding: 0;
+        background-color: transparent;
+    }
+
+    .fi-modal > .fi-modal-window-ctn > .fi-modal-window.fi-align-start .fi-modal-icon-bg > .fi-icon {
+        width: 1.375rem;
+        height: 1.375rem;
+        margin-top: 0.0625rem;
+    }
+
+    .fi-modal.fi-align-start:not(.fi-modal-has-sticky-header) > .fi-modal-window-ctn > .fi-modal-window-has-icon .fi-modal-content {
+        padding-inline-start: 3.625rem;
+    }
+
+    /* Notification: 384px, padding 20px 24px, radius 8, no border, white for every type; 24px icon, 16px message. */
+    .fi-no-notification:not(.fi-inline) {
+        padding: 1.25rem 1.5rem;
+        border-radius: var(--radius-xl);
+        --tw-ring-color: transparent;
+    }
+
+    .fi-no-notification.fi-color:not(.fi-inline) {
+        background-color: var(--ft-surface);
+        --tw-ring-color: transparent;
+    }
+
+    .fi-no-notification .fi-no-notification-main {
+        margin-top: 0;
+    }
+
+    .fi-no-notification .fi-no-notification-text {
+        gap: 0.5rem;
+    }
+
+    .fi-no-notification .fi-no-notification-title {
+        font-size: 1rem;
+        line-height: 1.5rem;
+        font-weight: 400;
+        color: var(--ft-table-text);
+    }
+
+    .fi-no-notification .fi-no-notification-body,
+    .fi-no-notification.fi-color .fi-no-notification-body {
+        color: var(--ft-table-text);
+    }
+
+    .fi-no-notification .fi-no-notification-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    .fi-no-notification .fi-no-notification-icon.fi-color {
+        color: var(--color-600);
+    }
+
+    /* Dropdown menu: items 5px 12px, line 22px; a danger item turns solid red on hover. */
+    .fi-dropdown-list-item {
+        padding: 0.3125rem 0.75rem;
+        line-height: 1.375rem;
+    }
+
+    .fi-dropdown-list-item.fi-color.fi-color-danger:not(.fi-disabled):not([disabled]):is(:hover, :focus-visible) {
+        background-color: var(--danger-600);
+    }
+
+    .fi-dropdown-list-item.fi-color.fi-color-danger:not(.fi-disabled):not([disabled]):is(:hover, :focus-visible) .fi-dropdown-list-item-label,
+    .fi-dropdown-list-item.fi-color.fi-color-danger:not(.fi-disabled):not([disabled]):is(:hover, :focus-visible) > .fi-icon {
+        color: #fff;
+    }
+
+    /* Empty: a plain light-gray image, "No data" in the secondary text color. */
+    .fi-empty-state .fi-empty-state-icon-bg,
+    .fi-empty-state .fi-empty-state-icon-bg.fi-color,
+    .fi-ta-empty-state .fi-ta-empty-state-icon-bg {
+        margin-bottom: 0.5rem;
+        padding: 0;
+        background-color: transparent;
+    }
+
+    .fi-empty-state .fi-empty-state-icon-bg .fi-icon,
+    .fi-empty-state .fi-empty-state-icon-bg .fi-icon.fi-color,
+    .fi-ta-empty-state .fi-ta-empty-state-icon-bg .fi-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        color: var(--ft-border-input);
+    }
+
+    .fi-empty-state .fi-empty-state-heading,
+    .fi-ta-empty-state .fi-ta-empty-state-heading {
+        font-size: 0.875rem;
+        line-height: 1.375rem;
+        font-weight: 400;
+        color: var(--ft-text-secondary);
+    }
+
+    /* Upload.Dragger: radius 8. */
+    .fi-fo-file-upload .filepond--root {
+        border-radius: var(--radius-xl);
+    }
+
+    /* Steps: 32px circles without a ring; the current step filled, finished ones light blue with a check. */
+    .fi-sc-wizard .fi-sc-wizard-header .fi-sc-wizard-header-step .fi-sc-wizard-header-step-btn .fi-sc-wizard-header-step-icon-ctn.fi-sc-wizard-header-step-icon-ctn {
+        width: 2rem;
+        height: 2rem;
+        border-width: 0;
+        background-color: rgb(0 0 0 / 0.06);
+    }
+
+    .dark .fi-sc-wizard .fi-sc-wizard-header .fi-sc-wizard-header-step .fi-sc-wizard-header-step-btn .fi-sc-wizard-header-step-icon-ctn.fi-sc-wizard-header-step-icon-ctn {
+        background-color: rgb(255 255 255 / 0.08);
+    }
+
+    .fi-sc-wizard .fi-sc-wizard-header .fi-sc-wizard-header-step.fi-active .fi-sc-wizard-header-step-btn .fi-sc-wizard-header-step-icon-ctn.fi-sc-wizard-header-step-icon-ctn {
+        background-color: var(--primary-600);
+    }
+
+    .fi-sc-wizard .fi-sc-wizard-header .fi-sc-wizard-header-step.fi-active .fi-sc-wizard-header-step-btn .fi-sc-wizard-header-step-icon-ctn .fi-sc-wizard-header-step-number,
+    .fi-sc-wizard .fi-sc-wizard-header .fi-sc-wizard-header-step.fi-active .fi-sc-wizard-header-step-btn .fi-sc-wizard-header-step-icon-ctn .fi-icon {
+        color: #fff;
+    }
+
+    .fi-sc-wizard .fi-sc-wizard-header .fi-sc-wizard-header-step.fi-completed .fi-sc-wizard-header-step-btn .fi-sc-wizard-header-step-icon-ctn.fi-sc-wizard-header-step-icon-ctn {
+        background-color: var(--primary-50);
+    }
+
+    .dark .fi-sc-wizard .fi-sc-wizard-header .fi-sc-wizard-header-step.fi-completed .fi-sc-wizard-header-step-btn .fi-sc-wizard-header-step-icon-ctn.fi-sc-wizard-header-step-icon-ctn {
+        background-color: #111a2c;
+    }
+
+    .fi-sc-wizard .fi-sc-wizard-header .fi-sc-wizard-header-step.fi-completed .fi-sc-wizard-header-step-btn .fi-sc-wizard-header-step-icon-ctn .fi-icon {
+        color: var(--primary-600);
+    }
+
+    .fi-sc-wizard .fi-sc-wizard-header .fi-sc-wizard-header-step .fi-sc-wizard-header-step-btn .fi-sc-wizard-header-step-text .fi-sc-wizard-header-step-label {
+        font-size: 1rem;
+        font-weight: 400;
+    }
+
+    .fi-sc-wizard .fi-sc-wizard-header .fi-sc-wizard-header-step.fi-active .fi-sc-wizard-header-step-btn .fi-sc-wizard-header-step-text .fi-sc-wizard-header-step-label {
+        color: var(--ft-table-text);
+        font-weight: 600;
+    }
+
+}
+
+/* Filament sets button colors with utility classes (fi-bg-color-400, fi-text-color-950…), which live in the
+   utilities layer: overriding them takes the same layer. */
+@layer utilities {
+    /* Primary and danger buttons keep antd's white text (#1677ff / #ff4d4f with white is below 4.5:1). Not the
+       toggle-button labels: an unchecked option stays a white default button. */
+    .fi-btn.fi-color-primary:not(.fi-outlined):not(label),
+    .fi-btn.fi-color-danger:not(.fi-outlined):not(label) {
+        --bg: var(--color-600);
+        --hover-bg: var(--color-500);
+        --text: #fff;
+        --hover-text: #fff;
+        --dark-bg: var(--color-600);
+        --dark-hover-bg: var(--color-500);
+        --dark-text: #fff;
+        --dark-hover-text: #fff;
+        --tw-shadow: 0 2px 0 rgb(5 145 255 / 0.1);
+    }
+
+    .fi-btn.fi-color-danger:not(.fi-outlined):not(label) {
+        --tw-shadow: 0 2px 0 rgb(255 38 5 / 0.06);
+    }
+
+    /* Radio.Button (outline): the checked option keeps a white face with border and text in the color. */
+    .fi-fo-toggle-buttons input:checked + label.fi-btn.fi-color {
+        --bg: var(--ft-surface);
+        --hover-bg: var(--ft-surface);
+        --text: var(--color-600);
+        --hover-text: var(--color-500);
+        --dark-bg: var(--ft-surface);
+        --dark-hover-bg: var(--ft-surface);
+        --dark-text: var(--color-500);
+        --dark-hover-text: var(--color-400);
+        --tw-ring-shadow: 0 0 0 1px var(--color-600);
+    }
+}
