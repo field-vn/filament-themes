@@ -1,0 +1,864 @@
+/*!
+ * Filament Themes | core | MIT | field-vn/filament-themes
+ *
+ * Structure shared by every preset: which Filament selectors to override and how. All values come from --ft-*
+ * tokens that each preset stylesheet (tabler.css, shadcn.css, antd.css) defines for light mode, `.dark` and
+ * html[data-ft-sidebar="dark"]; a preset may also add rules of its own, loaded after this file.
+ *
+ * Plain CSS on purpose: no build step, no Tailwind version coupling. Loaded after the panel theme (render hook
+ * STYLES_AFTER) and kept in the `components` layer, so a selector copied from vendor/filament/<package>/resources/css
+ * wins over Filament's own rule, while utilities still win.
+ *
+ * Contents: 2 page · 3 sidebar · 4 topbar (vertical) · 5 top navigation (horizontal: two-row header)
+ *           6 page header · 7 cards · 8 tables · 9 forms · 10 buttons & badges · 11 overlays
+ *           12 tabs & pagination · 13 widgets · 14 login
+ */
+
+@layer components {
+    /* 2. Page -------------------------------------------------------------------------------------------- */
+
+    .fi-body {
+        --topbar-height: var(--ft-topbar-height);
+        --ft-container: 100%;
+        background-color: var(--ft-body-bg);
+        font-family: var(--ft-font-family, var(--font-sans));
+    }
+
+    /* The header lines up with the page content: follow the panel's ->maxContentWidth(). */
+    .fi-body:has(.fi-main.fi-width-3xl) { --ft-container: var(--container-3xl); }
+    .fi-body:has(.fi-main.fi-width-4xl) { --ft-container: var(--container-4xl); }
+    .fi-body:has(.fi-main.fi-width-5xl) { --ft-container: var(--container-5xl); }
+    .fi-body:has(.fi-main.fi-width-6xl) { --ft-container: var(--container-6xl); }
+    .fi-body:has(.fi-main.fi-width-7xl) { --ft-container: var(--container-7xl); }
+    .fi-body:has(.fi-main.fi-width-screen-lg) { --ft-container: var(--breakpoint-lg); }
+    .fi-body:has(.fi-main.fi-width-screen-xl) { --ft-container: var(--breakpoint-xl); }
+    .fi-body:has(.fi-main.fi-width-screen-2xl) { --ft-container: var(--breakpoint-2xl); }
+
+    .fi-page-header-main-ctn {
+        row-gap: var(--ft-page-gap);
+        padding-block: var(--ft-page-header-padding);
+    }
+
+    .fi-page-content {
+        row-gap: var(--ft-page-gap);
+    }
+
+    /* 3. Sidebar (also the mobile drawer of the horizontal layout) --------------------------------------- */
+
+    .fi-sidebar {
+        background-color: var(--ft-sidebar-bg);
+        color-scheme: var(--ft-sidebar-scheme);
+    }
+
+    @media (min-width: 64rem) {
+        .fi-sidebar {
+            border-inline-end: 1px solid var(--ft-sidebar-divider);
+        }
+    }
+
+    /* No topbar (the vertical layout): logo on top of the sidebar, lined up with the menu. */
+    .fi-body:not(.fi-body-has-topbar) .fi-sidebar-header {
+        padding-inline: var(--ft-sidebar-logo-inset);
+    }
+
+    .fi-body:not(.fi-body-has-topbar) .fi-sidebar-header .fi-logo {
+        margin-inline-start: 0;
+    }
+
+    /* No topbar on small screens: the drawer toggle becomes a slim white bar. */
+    .fi-body > .fi-layout-sidebar-toggle-btn-ctn {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        padding: 0.625rem 1rem;
+        background-color: var(--ft-surface);
+        box-shadow: 0 1px 0 0 var(--ft-border);
+    }
+
+    .fi-body-has-topbar .fi-sidebar-header {
+        background-color: var(--ft-sidebar-bg);
+        --tw-ring-color: var(--ft-sidebar-divider);
+    }
+
+    [data-ft-sidebar='dark'] .fi-sidebar .fi-logo,
+    [data-ft-sidebar='dark'] .fi-topbar-start .fi-logo {
+        color: #fff;
+    }
+
+    /* A dark sidebar takes the dark-mode logo (->darkModeBrandLogo()). */
+    [data-ft-sidebar='dark'] .fi-sidebar .fi-logo.fi-logo-light,
+    [data-ft-sidebar='dark'] .fi-topbar-start .fi-logo.fi-logo-light {
+        display: none;
+    }
+
+    [data-ft-sidebar='dark'] .fi-sidebar .fi-logo.fi-logo-dark,
+    [data-ft-sidebar='dark'] .fi-topbar-start .fi-logo.fi-logo-dark {
+        display: flex;
+    }
+
+    .fi-sidebar-nav {
+        row-gap: var(--ft-sidebar-group-gap);
+        padding: var(--ft-sidebar-nav-padding);
+    }
+
+    [data-ft-sidebar='dark'] .fi-sidebar-nav {
+        scrollbar-color: rgb(255 255 255 / 0.2) transparent;
+    }
+
+    .fi-sidebar-nav-groups {
+        row-gap: var(--ft-sidebar-group-gap);
+        margin-inline: 0;
+    }
+
+    .fi-sidebar-group-btn {
+        padding: var(--ft-sidebar-group-label-padding);
+    }
+
+    .fi-sidebar .fi-sidebar-group-label {
+        color: var(--ft-sidebar-text-muted);
+        font-size: var(--ft-label-size);
+        line-height: var(--ft-label-line-height);
+        font-weight: var(--ft-label-weight);
+        letter-spacing: var(--ft-label-tracking);
+        text-transform: var(--ft-label-transform);
+    }
+
+    .fi-sidebar .fi-sidebar-group-btn .fi-icon,
+    .fi-sidebar .fi-sidebar-group-dropdown-trigger-btn .fi-icon {
+        color: var(--ft-sidebar-text-muted);
+    }
+
+    .fi-sidebar .fi-sidebar-group.fi-active .fi-sidebar-group-dropdown-trigger-btn .fi-icon {
+        color: var(--ft-sidebar-text-active);
+    }
+
+    .fi-sidebar .fi-sidebar-item-btn,
+    .fi-sidebar .fi-sidebar-group-dropdown-trigger-btn,
+    .fi-sidebar .fi-sidebar-database-notifications-btn {
+        padding: var(--ft-nav-item-padding);
+        border-radius: var(--ft-nav-item-radius);
+    }
+
+    .fi-sidebar .fi-sidebar-item-btn > .fi-icon,
+    .fi-sidebar .fi-sidebar-database-notifications-btn > .fi-icon {
+        color: var(--ft-sidebar-text-muted);
+    }
+
+    .fi-sidebar .fi-sidebar-item-label,
+    .fi-sidebar .fi-sidebar-database-notifications-btn > .fi-sidebar-database-notifications-btn-label {
+        color: var(--ft-sidebar-text);
+    }
+
+    .fi-sidebar .fi-sidebar-item.fi-sidebar-item-has-url > .fi-sidebar-item-btn:hover,
+    .fi-sidebar .fi-sidebar-item.fi-sidebar-item-has-url > .fi-sidebar-item-btn:focus-visible,
+    .fi-sidebar .fi-sidebar-group-dropdown-trigger-btn:hover,
+    .fi-sidebar .fi-sidebar-group-dropdown-trigger-btn:focus-visible,
+    .fi-sidebar .fi-sidebar-database-notifications-btn:hover,
+    .fi-sidebar .fi-sidebar-database-notifications-btn:focus-visible {
+        background-color: var(--ft-sidebar-hover-bg);
+    }
+
+    .fi-sidebar .fi-sidebar-item-btn:hover > .fi-sidebar-item-label,
+    .fi-sidebar .fi-sidebar-item-btn:hover > .fi-icon {
+        color: var(--ft-sidebar-text-active);
+    }
+
+    .fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+        background-color: var(--ft-sidebar-active-bg);
+        box-shadow: inset 3px 0 0 var(--ft-sidebar-accent);
+    }
+
+    [dir='rtl'] .fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+        box-shadow: inset -3px 0 0 var(--ft-sidebar-accent);
+    }
+
+    .fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-sidebar-item-label,
+    .fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon {
+        color: var(--ft-sidebar-text-active);
+    }
+
+    [data-ft-sidebar='dark'] .fi-sidebar .fi-sidebar-item .fi-badge.fi-color {
+        background-color: color-mix(in oklab, var(--color-400) 22%, transparent);
+        color: var(--color-300);
+    }
+
+    .fi-sidebar .fi-sidebar-item-grouped-border-part {
+        background-color: var(--ft-sidebar-text-muted);
+    }
+
+    .fi-sidebar .fi-sidebar-item-grouped-border-part-not-first,
+    .fi-sidebar .fi-sidebar-item-grouped-border-part-not-last {
+        background-color: var(--ft-sidebar-divider);
+    }
+
+    .fi-sidebar
+        .fi-sidebar-item.fi-active
+        > .fi-sidebar-item-btn
+        > .fi-sidebar-item-grouped-border
+        > .fi-sidebar-item-grouped-border-part {
+        background-color: var(--ft-sidebar-accent);
+    }
+
+    .fi-sidebar .fi-sidebar-footer,
+    .fi-sidebar .fi-sidebar-header-controls::after {
+        border-color: var(--ft-sidebar-divider);
+    }
+
+    .fi-sidebar .fi-icon-btn {
+        color: var(--ft-sidebar-text-muted);
+    }
+
+    .fi-sidebar .fi-icon-btn:hover {
+        color: var(--ft-sidebar-text-active);
+    }
+
+    .fi-sidebar .fi-user-menu-trigger:hover {
+        background-color: var(--ft-sidebar-hover-bg);
+    }
+
+    .fi-sidebar .fi-user-menu-trigger,
+    .fi-sidebar .fi-user-menu-trigger .fi-tenant-menu-trigger-text {
+        color: var(--ft-sidebar-text-active);
+    }
+
+    /* Global search in a dark sidebar (no topbar): translucent field instead of a white box. */
+    [data-ft-sidebar='dark'] .fi-sidebar .fi-input-wrp {
+        background-color: rgb(255 255 255 / 0.06);
+        --tw-ring-color: rgb(255 255 255 / 0.12);
+        --tw-shadow: 0 0 #0000;
+    }
+
+    [data-ft-sidebar='dark'] .fi-sidebar .fi-input {
+        color: #fff;
+    }
+
+    [data-ft-sidebar='dark'] .fi-sidebar .fi-input::placeholder,
+    [data-ft-sidebar='dark'] .fi-sidebar .fi-input-wrp .fi-icon {
+        color: var(--ft-sidebar-text-muted);
+    }
+
+    /* 4. Topbar of the vertical layout, if the panel keeps one: its start is painted as the top of the sidebar */
+
+    .fi-topbar {
+        background-color: var(--ft-surface);
+        --tw-ring-color: transparent;
+        --tw-shadow: 0 1px 0 0 var(--ft-border);
+    }
+
+    .fi-topbar-start .fi-logo {
+        margin-inline-start: 0;
+    }
+
+    @media (min-width: 64rem) {
+        .fi-body:not(.fi-body-has-top-navigation) .fi-topbar {
+            --ft-rail: var(--sidebar-width);
+            padding-inline-start: 0;
+            background-image: linear-gradient(
+                to right,
+                var(--ft-sidebar-bg) var(--ft-rail),
+                transparent var(--ft-rail)
+            );
+        }
+
+        [dir='rtl'] .fi-body:not(.fi-body-has-top-navigation) .fi-topbar {
+            background-image: linear-gradient(
+                to left,
+                var(--ft-sidebar-bg) var(--ft-rail),
+                transparent var(--ft-rail)
+            );
+        }
+
+        .fi-body.fi-body-has-sidebar-collapsible-on-desktop:has(.fi-sidebar:not(.fi-sidebar-open)) .fi-topbar {
+            --ft-rail: var(--collapsed-sidebar-width);
+        }
+
+        .fi-body.fi-body-has-sidebar-fully-collapsible-on-desktop:has(.fi-sidebar:not(.fi-sidebar-open)) .fi-topbar {
+            --ft-rail: 0px;
+        }
+
+        .fi-body:not(.fi-body-has-top-navigation) .fi-topbar-start {
+            box-sizing: border-box;
+            min-width: var(--ft-rail);
+            margin-inline-end: 1rem;
+            padding-inline: var(--ft-sidebar-logo-inset) 0.75rem;
+        }
+
+        /* Collapsed rail is narrower than the logo: the logo sits on the white part again. */
+        :root[data-ft-sidebar='dark']:not(.dark) .fi-body.fi-body-has-sidebar-collapsible-on-desktop:has(.fi-sidebar:not(.fi-sidebar-open)) .fi-topbar-start .fi-logo,
+        :root[data-ft-sidebar='dark']:not(.dark) .fi-body.fi-body-has-sidebar-fully-collapsible-on-desktop:has(.fi-sidebar:not(.fi-sidebar-open)) .fi-topbar-start .fi-logo {
+            color: var(--gray-950);
+        }
+
+        :root[data-ft-sidebar='dark']:not(.dark) .fi-body.fi-body-has-sidebar-collapsible-on-desktop:has(.fi-sidebar:not(.fi-sidebar-open)) .fi-topbar-start .fi-logo.fi-logo-light,
+        :root[data-ft-sidebar='dark']:not(.dark) .fi-body.fi-body-has-sidebar-fully-collapsible-on-desktop:has(.fi-sidebar:not(.fi-sidebar-open)) .fi-topbar-start .fi-logo.fi-logo-light {
+            display: flex;
+        }
+
+        :root[data-ft-sidebar='dark']:not(.dark) .fi-body.fi-body-has-sidebar-collapsible-on-desktop:has(.fi-sidebar:not(.fi-sidebar-open)) .fi-topbar-start .fi-logo.fi-logo-dark,
+        :root[data-ft-sidebar='dark']:not(.dark) .fi-body.fi-body-has-sidebar-fully-collapsible-on-desktop:has(.fi-sidebar:not(.fi-sidebar-open)) .fi-topbar-start .fi-logo.fi-logo-dark {
+            display: none;
+        }
+
+        .fi-body:not(.fi-body-has-top-navigation) .fi-topbar-start .fi-icon-btn {
+            color: var(--ft-sidebar-text-muted);
+        }
+    }
+
+    /* 5. Top navigation (->horizontal()): Tabler's classic header, two white rows ---------------------------
+       Row 1: logo + search, notifications, user menu. Row 2: the menu, active item underlined.
+       Both rows line up with the page content (--ft-container). Below lg Filament keeps one row + drawer. */
+
+    @media (min-width: 64rem) {
+        .fi-body-has-top-navigation .fi-topbar {
+            flex-wrap: wrap;
+            align-content: flex-start;
+            padding-inline: max(2rem, calc((100% - var(--ft-container)) / 2 + 2rem));
+        }
+
+        .fi-body-has-top-navigation .fi-topbar-start,
+        .fi-body-has-top-navigation .fi-topbar-end {
+            min-height: var(--topbar-height);
+        }
+
+        .fi-body-has-top-navigation .fi-topbar-nav-groups {
+            position: relative;
+            order: 3;
+            flex-basis: 100%;
+            flex-wrap: nowrap;
+            align-items: center;
+            column-gap: 0.25rem;
+            min-height: var(--ft-navbar-height);
+            margin: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        /* Full-bleed divider between the rows (.fi-topbar-ctn clips the overflow). */
+        .fi-body-has-top-navigation .fi-topbar-nav-groups::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            inset-inline: -100vw;
+            height: 1px;
+            background-color: var(--ft-border);
+        }
+    }
+
+    .fi-topbar-item-btn {
+        position: relative;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .fi-topbar-item-btn:hover,
+    .fi-topbar-item-btn:focus-visible,
+    .fi-topbar-item.fi-active .fi-topbar-item-btn {
+        background-color: transparent;
+    }
+
+    .fi-topbar-item-btn > .fi-icon {
+        color: var(--ft-text-secondary);
+    }
+
+    .fi-topbar-item-label {
+        color: var(--gray-700);
+    }
+
+    .dark .fi-topbar-item-label {
+        color: var(--gray-300);
+    }
+
+    .fi-topbar-item-btn:hover > .fi-topbar-item-label,
+    .fi-topbar-item.fi-active .fi-topbar-item-label {
+        color: var(--gray-950);
+    }
+
+    .dark .fi-topbar-item-btn:hover > .fi-topbar-item-label,
+    .dark .fi-topbar-item.fi-active .fi-topbar-item-label {
+        color: #fff;
+    }
+
+    .fi-topbar-item.fi-active .fi-topbar-item-btn > .fi-icon {
+        color: var(--primary-600);
+    }
+
+    .dark .fi-topbar-item.fi-active .fi-topbar-item-btn > .fi-icon {
+        color: var(--primary-400);
+    }
+
+    /* Underline on the bottom edge of the menu row: the button is 2.25rem tall and centred in the row. */
+    .fi-topbar-item.fi-active .fi-topbar-item-btn::after {
+        content: '';
+        position: absolute;
+        inset-inline: 0.75rem;
+        bottom: calc((var(--ft-navbar-height) - 2.25rem) / -2);
+        height: 2px;
+        background-color: var(--primary-600);
+    }
+
+    .dark .fi-topbar-item.fi-active .fi-topbar-item-btn::after {
+        background-color: var(--primary-400);
+    }
+
+    /* 6. Page header: breadcrumbs become Tabler's "pretitle" ---------------------------------------------- */
+
+    .fi-header .fi-breadcrumbs {
+        margin-bottom: 0.25rem;
+    }
+
+    .fi-breadcrumbs ol li {
+        color: var(--ft-text-secondary);
+        font-size: var(--ft-label-size);
+        line-height: var(--ft-label-line-height);
+        font-weight: var(--ft-label-weight);
+        letter-spacing: var(--ft-label-tracking);
+        text-transform: var(--ft-label-transform);
+    }
+
+    .fi-header-heading {
+        font-size: var(--ft-heading-size);
+        line-height: var(--ft-heading-line-height);
+        font-weight: var(--ft-heading-weight);
+        letter-spacing: var(--ft-heading-tracking);
+    }
+
+    .fi-header-subheading {
+        margin-top: 0.25rem;
+        color: var(--ft-text-secondary);
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
+
+    /* 7. Cards ------------------------------------------------------------------------------------------- */
+
+    .fi-section:not(.fi-section-not-contained):not(.fi-aside),
+    .fi-section:not(.fi-section-not-contained).fi-aside > .fi-section-content-ctn,
+    .fi-ta-ctn,
+    .fi-tabs:not(.fi-contained),
+    .fi-wi-stats-overview-stat,
+    .fi-fo-repeater-item,
+    .fi-fo-builder-item {
+        background-color: var(--ft-surface);
+        --tw-ring-color: var(--ft-border);
+        --tw-shadow: var(--ft-shadow-card);
+    }
+
+    .fi-section:not(.fi-section-not-contained):not(.fi-aside).fi-secondary,
+    .fi-section:not(.fi-section-not-contained).fi-aside.fi-secondary > .fi-section-content-ctn {
+        background-color: var(--ft-surface-secondary);
+    }
+
+    .fi-section:not(.fi-section-not-contained):not(.fi-aside) > .fi-section-header {
+        padding: var(--ft-card-header-padding);
+    }
+
+    .fi-section:not(.fi-section-not-contained):not(.fi-divided) > .fi-section-content-ctn > .fi-section-content,
+    .fi-section:not(.fi-section-not-contained).fi-divided > .fi-section-content-ctn > .fi-section-content > * {
+        padding: var(--ft-card-padding);
+    }
+
+    .fi-section:not(.fi-section-not-contained) > .fi-section-content-ctn > .fi-section-footer {
+        padding: var(--ft-card-footer-padding);
+        background-color: var(--ft-surface-secondary);
+        border-color: var(--ft-border);
+        border-end-start-radius: var(--radius-xl);
+        border-end-end-radius: var(--radius-xl);
+    }
+
+    .fi-section:not(.fi-section-not-contained):not(.fi-aside).fi-section-has-header:not(.fi-collapsed) > .fi-section-content-ctn,
+    .fi-fieldset {
+        border-color: var(--ft-border);
+    }
+
+    .fi-section.fi-divided > .fi-section-content-ctn > .fi-section-content > :not(:last-child) {
+        border-color: var(--ft-border);
+    }
+
+    /* 8. Tables ------------------------------------------------------------------------------------------ */
+
+    .fi-ta-ctn .fi-ta-header,
+    .fi-ta-ctn .fi-ta-header-toolbar,
+    .fi-ta-ctn .fi-ta-filters-above-content-ctn,
+    .fi-ta-ctn .fi-ta-filters.fi-ta-filters-below-content,
+    .fi-ta-table > :not(:last-child),
+    .fi-ta-table > thead > :not(:last-child),
+    .fi-ta-table > tbody > :not(:last-child) {
+        border-color: var(--ft-border);
+    }
+
+    .fi-ta-ctn .fi-ta-header-toolbar {
+        padding-block: var(--ft-table-toolbar-py);
+    }
+
+    /* An empty first slot (no bulk/grouping actions) keeps its min-height and leaves a blank row when the search wraps. */
+    .fi-ta-ctn .fi-ta-header-toolbar > :first-child:not(:has(*)) {
+        display: none;
+    }
+
+    .fi-ta-table > thead > tr,
+    .fi-ta-table > tfoot {
+        background-color: var(--ft-table-head-bg);
+    }
+
+    .fi-ta-table:not(.fi-ta-table-stacked-on-mobile)
+        :is(.fi-ta-text, .fi-ta-text-input, .fi-ta-icon, .fi-ta-image, .fi-ta-color, .fi-ta-select, .fi-ta-toggle, .fi-ta-checkbox):not(.fi-inline),
+    .fi-ta-table .fi-ta-cell:has(.fi-ta-actions),
+    .fi-ta-table .fi-ta-cell:has(.fi-ta-record-checkbox),
+    .fi-ta-table .fi-ta-cell.fi-ta-selection-cell {
+        padding-block: var(--ft-table-cell-py);
+    }
+
+    @media (min-width: 40rem) {
+        .fi-ta-table
+            :is(.fi-ta-text, .fi-ta-text-input, .fi-ta-icon, .fi-ta-image, .fi-ta-color, .fi-ta-select, .fi-ta-toggle, .fi-ta-checkbox):not(.fi-inline) {
+            padding-block: var(--ft-table-cell-py);
+        }
+    }
+
+    .fi-ta-header-cell {
+        padding-block: var(--ft-table-head-py);
+        color: var(--ft-table-head-color);
+        font-size: var(--ft-table-head-size);
+        line-height: var(--ft-table-head-line-height);
+        font-weight: var(--ft-table-head-weight);
+        letter-spacing: var(--ft-table-head-tracking);
+        text-transform: var(--ft-table-head-transform);
+    }
+
+    .fi-ta-header-cell.fi-ta-header-cell-sorted {
+        color: var(--ft-table-head-color-active);
+    }
+
+    .fi-ta-row.fi-clickable:hover,
+    .fi-ta-row.fi-striped {
+        background-color: var(--ft-table-row-hover);
+    }
+
+    .fi-ta-row.fi-ta-group-header-row > td {
+        background-color: var(--ft-surface-secondary);
+    }
+
+    .fi-ta-text-item {
+        color: var(--ft-table-text);
+    }
+
+    .fi-ta-text > .fi-ta-text-description,
+    .fi-ta-text > .fi-ta-text-list-limited-message {
+        color: var(--ft-text-secondary);
+    }
+
+    .fi-ta-ctn .fi-ta-header .fi-ta-header-heading,
+    .fi-section-header-heading {
+        font-weight: var(--ft-card-title-weight);
+    }
+
+    .fi-ta-ctn .fi-ta-header .fi-ta-header-description,
+    .fi-section-header-description {
+        color: var(--ft-text-secondary);
+    }
+
+    .fi-ta-ctn .fi-pagination,
+    .fi-ta-ctn .fi-ta-selection-indicator {
+        border-color: var(--ft-border);
+    }
+
+    /* 9. Forms ------------------------------------------------------------------------------------------- */
+
+    .fi-sc.fi-sc-has-gap,
+    .fi-sc-form {
+        gap: var(--ft-field-gap);
+    }
+
+    .fi-input-wrp {
+        background-color: var(--ft-input-bg);
+        --tw-ring-color: var(--ft-border-input);
+        --tw-shadow: var(--ft-shadow-input);
+    }
+
+    .fi-input-wrp:not(.fi-disabled):not(:has(.fi-ac-action:focus)):focus-within {
+        --tw-ring-shadow: 0 0 0 1px var(--ft-focus-border);
+        --tw-shadow: 0 0 0 var(--ft-focus-width) var(--ft-focus-ring);
+    }
+
+    .fi-input-wrp:not(.fi-disabled):not(:has(.fi-ac-action:focus)).fi-invalid:focus-within {
+        --tw-ring-shadow: 0 0 0 1px var(--danger-500);
+        --tw-shadow: 0 0 0 var(--ft-focus-width) color-mix(in oklab, var(--danger-500) 25%, transparent);
+    }
+
+    .fi-input-wrp.fi-disabled {
+        background-color: var(--ft-surface-secondary);
+    }
+
+    .fi-input-wrp .fi-input-wrp-prefix:not(.fi-inline),
+    .fi-input-wrp .fi-input-wrp-suffix:not(.fi-inline) {
+        border-color: var(--ft-border);
+        background-color: var(--ft-surface-secondary);
+    }
+
+    .fi-input-wrp .fi-input-wrp-prefix:not(.fi-inline) {
+        border-start-start-radius: var(--radius-lg);
+        border-end-start-radius: var(--radius-lg);
+    }
+
+    .fi-input-wrp .fi-input-wrp-suffix:not(.fi-inline) {
+        border-start-end-radius: var(--radius-lg);
+        border-end-end-radius: var(--radius-lg);
+    }
+
+    .fi-checkbox-input,
+    .fi-radio-input {
+        --tw-ring-color: var(--ft-border-input);
+    }
+
+    /* Switch: each system has its own track and knob size. */
+    .fi-toggle {
+        width: var(--ft-switch-width);
+        height: var(--ft-switch-height);
+        border-width: var(--ft-switch-border);
+    }
+
+    .fi-toggle:not(.fi-color) {
+        background-color: var(--ft-switch-off-bg);
+    }
+
+    .fi-toggle > :first-child {
+        width: var(--ft-switch-knob);
+        height: var(--ft-switch-knob);
+    }
+
+    .fi-toggle.fi-toggle-on > :first-child {
+        --tw-translate-x: var(--ft-switch-shift);
+    }
+
+    [dir='rtl'] .fi-toggle.fi-toggle-on > :first-child {
+        --tw-translate-x: calc(var(--ft-switch-shift) * -1);
+    }
+
+    /* File upload: a dashed drop zone (Tabler dropzone, antd Upload.Dragger) instead of a raised field. */
+    .fi-fo-file-upload .filepond--root {
+        background-color: var(--ft-upload-bg);
+        border: 1px dashed var(--ft-border-input);
+        border-radius: var(--radius-lg);
+        --tw-ring-shadow: 0 0 #0000;
+        --tw-shadow: 0 0 #0000;
+    }
+
+    .fi-fo-file-upload .filepond--root:not([data-disabled='disabled']):hover {
+        border-color: var(--ft-upload-hover-border);
+    }
+
+    /* 10. Buttons & badges ------------------------------------------------------------------------------- */
+
+    .fi-btn:not(.fi-color),
+    label.fi-btn,
+    .fi-btn-group {
+        --tw-ring-color: var(--ft-border-input);
+    }
+
+    /* Colored buttons have no ring utility, so nothing paints their box-shadow: always compose it, so the presets'
+       --tw-shadow / --tw-inset-shadow show on every button. */
+    .fi-btn {
+        font-weight: var(--ft-btn-weight);
+        box-shadow:
+            var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+            var(--tw-shadow);
+    }
+
+    .fi-btn.fi-size-md {
+        padding: var(--ft-btn-padding);
+        line-height: var(--ft-btn-line-height);
+    }
+
+    .fi-btn.fi-size-md,
+    .fi-btn.fi-size-lg,
+    .fi-btn.fi-size-xl {
+        column-gap: 0.5rem;
+    }
+
+    .fi-btn:not(.fi-outlined) {
+        --tw-shadow: var(--ft-shadow-input);
+    }
+
+    .fi-badge {
+        border-radius: var(--radius-sm);
+        --tw-ring-shadow: 0 0 #0000;
+    }
+
+    .fi-badge.fi-color {
+        background-color: color-mix(in oklab, var(--color-500) 12%, transparent);
+    }
+
+    .dark .fi-badge.fi-color {
+        background-color: color-mix(in oklab, var(--color-400) 16%, transparent);
+    }
+
+    /* 11. Dropdowns, modals, notifications ------------------------------------------------------------- */
+
+    .fi-dropdown-panel,
+    .fi-modal-window,
+    .fi-no-notification {
+        background-color: var(--ft-surface);
+        --tw-ring-color: var(--ft-border);
+        --tw-shadow: var(--ft-shadow-overlay);
+    }
+
+    .fi-dropdown-list-item:not(.fi-disabled):not([disabled]):hover,
+    .fi-dropdown-list-item:not(.fi-disabled):not([disabled]):focus-visible,
+    .fi-dropdown-list-item:not(.fi-disabled):not([disabled]).fi-selected {
+        background-color: var(--ft-menu-hover-bg);
+    }
+
+    .fi-dropdown-header,
+    :where(.fi-dropdown-panel > :not(:last-child)),
+    .fi-dropdown-panel .fi-dropdown-list:not(:last-child) {
+        border-color: var(--ft-border);
+    }
+
+    .fi-no-notification:not(.fi-inline) {
+        --tw-shadow: var(--ft-shadow-overlay);
+    }
+
+    .fi-modal > .fi-modal-close-overlay {
+        background-color: var(--ft-overlay);
+    }
+
+    /* Tooltips are dark in all three systems; Filament ships tippy's white "light" theme. Filament paints the arrow
+       from --tippy-background-color, so the box and the arrow change together. */
+    .tippy-box[data-theme] {
+        --tippy-background-color: var(--ft-tooltip-bg);
+        --tippy-box-shadow: var(--ft-tooltip-shadow);
+        background-color: var(--tippy-background-color);
+        box-shadow: var(--tippy-box-shadow);
+        color: var(--ft-tooltip-text);
+        border-radius: var(--ft-tooltip-radius);
+        font-size: var(--ft-tooltip-size);
+        line-height: var(--ft-tooltip-line-height);
+    }
+
+    .tippy-box[data-theme] > .tippy-content {
+        padding: var(--ft-tooltip-padding);
+    }
+
+    /* 12. Tabs & pagination ----------------------------------------------------------------------------- */
+
+    .fi-tabs.fi-contained {
+        border-color: var(--ft-border);
+    }
+
+    .fi-tabs-item {
+        position: relative;
+    }
+
+    .fi-tabs-item:hover,
+    .fi-tabs-item:focus-visible,
+    .fi-tabs-item.fi-active {
+        background-color: transparent;
+    }
+
+    .fi-tabs-item.fi-active::after {
+        content: '';
+        position: absolute;
+        inset-inline: 0.75rem;
+        bottom: -0.25rem;
+        height: 2px;
+        border-radius: 2px;
+        background-color: var(--primary-600);
+    }
+
+    .dark .fi-tabs-item.fi-active::after {
+        background-color: var(--primary-400);
+    }
+
+    .fi-tabs.fi-vertical .fi-tabs-item.fi-active::after {
+        inset-block: 0.5rem;
+        inset-inline: -0.5rem auto;
+        width: 2px;
+        height: auto;
+    }
+
+    .fi-pagination .fi-pagination-items {
+        gap: 0.25rem;
+        background-color: transparent;
+        --tw-ring-color: transparent;
+        --tw-shadow: 0 0 #0000;
+    }
+
+    .fi-pagination .fi-pagination-item,
+    .fi-pagination .fi-pagination-item:first-child,
+    .fi-pagination .fi-pagination-item:last-child {
+        border-inline-width: 0;
+    }
+
+    .fi-pagination .fi-pagination-item .fi-pagination-item-btn,
+    .fi-pagination .fi-pagination-item:first-of-type .fi-pagination-item-btn,
+    .fi-pagination .fi-pagination-item:last-of-type .fi-pagination-item-btn {
+        min-width: 2rem;
+        justify-content: center;
+        border-radius: var(--radius-lg);
+    }
+
+    .fi-pagination .fi-pagination-item.fi-active .fi-pagination-item-btn {
+        background-color: var(--primary-600);
+    }
+
+    .fi-pagination .fi-pagination-item.fi-active .fi-pagination-item-label {
+        color: #fff;
+    }
+
+    .fi-pagination .fi-pagination-item-btn:enabled:hover {
+        background-color: color-mix(in oklab, var(--primary-500) 8%, transparent);
+    }
+
+    /* 13. Widgets ---------------------------------------------------------------------------------------- */
+
+    .fi-wi-stats-overview-stat-label {
+        color: var(--ft-text-secondary);
+        font-size: var(--ft-label-size);
+        line-height: var(--ft-label-line-height);
+        font-weight: var(--ft-label-weight);
+        letter-spacing: var(--ft-label-tracking);
+        text-transform: var(--ft-label-transform);
+    }
+
+    .fi-wi-stats-overview-stat-value {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        font-weight: var(--ft-stat-value-weight);
+    }
+
+    /* Infolist labels read as small labels (Tabler "datagrid-title", antd Descriptions label). */
+    .fi-in-entry .fi-in-entry-label {
+        color: var(--ft-text-secondary);
+        font-size: var(--ft-label-size);
+        line-height: var(--ft-label-line-height);
+        font-weight: var(--ft-label-weight);
+        letter-spacing: var(--ft-label-tracking);
+        text-transform: var(--ft-label-transform);
+    }
+
+    /* Callouts start from a plain card; each preset colors them. */
+    .fi-callout {
+        background-color: var(--ft-surface);
+        --tw-ring-color: var(--ft-border);
+    }
+
+    /* 14. Login & other simple pages -------------------------------------------------------------------- */
+
+    .fi-simple-main {
+        background-color: var(--ft-surface);
+        --tw-ring-color: var(--ft-border);
+        --tw-shadow: var(--ft-shadow-card);
+    }
+
+    @media (min-width: 40rem) {
+        .fi-simple-main {
+            padding: var(--ft-simple-padding);
+        }
+    }
+
+    .fi-simple-header-heading {
+        font-size: var(--ft-heading-size);
+        line-height: var(--ft-heading-line-height);
+        font-weight: var(--ft-heading-weight);
+        letter-spacing: var(--ft-heading-tracking);
+    }
+}
