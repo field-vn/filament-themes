@@ -15,6 +15,7 @@
 
 - [特長](#特長)
 - [プリセット](#プリセット)
+- [スクリーンショット](#スクリーンショット)
 - [動作要件](#動作要件)
 - [インストール](#インストール)
 - [使い方](#使い方)
@@ -25,9 +26,11 @@
 - [コンポーネント一覧](#コンポーネント一覧)
 - [仕組み](#仕組み)
 - [Filament のアップグレード](#filament-のアップグレード)
+- [filament-tabler-theme からの移行](#filament-tabler-theme-からの移行)
 - [制限事項](#制限事項)
 - [開発](#開発)
 - [ライセンス](#ライセンス)
+- [クレジット](#クレジット)
 
 ## 特長
 
@@ -50,6 +53,30 @@
 テーブル、ボタン、モーダル、通知などのコンポーネントも、それぞれのデザインシステムに合わせてスタイリングされます。
 詳細は [コンポーネント一覧](#コンポーネント一覧) を参照してください。
 
+## スクリーンショット
+
+Ant Design プリセット（Theme preview ページ）。
+
+| ライト | ダーク |
+|---|---|
+| ![Ant Design プリセット, ライト](images/preview-light.png) | ![Ant Design プリセット, ダーク](images/preview-dark.png) |
+
+<details>
+<summary>その他: ログイン、モーダル、通知、モバイル、ページ全体</summary>
+
+| | ライト | ダーク |
+|---|---|---|
+| ログイン | ![Ant Design プリセット, ログイン, ライト](images/login-light.png) | ![Ant Design プリセット, ログイン, ダーク](images/login-dark.png) |
+| フォームモーダル | ![Ant Design プリセット, フォームモーダル, ライト](images/modal-form-light.png) | ![Ant Design プリセット, フォームモーダル, ダーク](images/modal-form-dark.png) |
+| 確認ダイアログ | ![Ant Design プリセット, 確認ダイアログ, ライト](images/modal-confirm-light.png) | ![Ant Design プリセット, 確認ダイアログ, ダーク](images/modal-confirm-dark.png) |
+| ウィザード | ![Ant Design プリセット, ウィザード, ライト](images/modal-wizard-light.png) | ![Ant Design プリセット, ウィザード, ダーク](images/modal-wizard-dark.png) |
+| スライドオーバー | ![Ant Design プリセット, スライドオーバー, ライト](images/slide-over-light.png) | ![Ant Design プリセット, スライドオーバー, ダーク](images/slide-over-dark.png) |
+| 通知 | ![Ant Design プリセット, 通知, ライト](images/notifications-light.png) | ![Ant Design プリセット, 通知, ダーク](images/notifications-dark.png) |
+| モバイル | ![Ant Design プリセット, モバイル, ライト](images/mobile-light.png) | ![Ant Design プリセット, モバイル, ダーク](images/mobile-dark.png) |
+| ページ全体 | ![Ant Design プリセット, ページ全体, ライト](images/preview-full-light.png) | ![Ant Design プリセット, ページ全体, ダーク](images/preview-full-dark.png) |
+
+</details>
+
 ## 動作要件
 
 - PHP 8.3 以上
@@ -63,6 +90,10 @@
 ```bash
 composer require field-vn/filament-themes:^0.1
 ```
+
+> [!NOTE]
+> まだバージョンタグはありません。`v0.1.0` がリリースされるまでは、development ブランチを指定してください:
+> `composer require field-vn/filament-themes:dev-development`
 
 **2.（任意）プリセットのアイコンセットをインストール**
 
@@ -317,6 +348,31 @@ Filament がクラスやマークアップを変更した場合、影響を受�
    該当するセレクターを修正します。
 3. 各プリセットで、ライト/ダークモード、縦型/横型レイアウト、モバイル表示のプレビューページを確認します。
 
+## filament-tabler-theme からの移行
+
+このパッケージの旧名は `field-vn/filament-tabler-theme` です。デフォルトのプリセットは引き続き Tabler なので、見た目は
+変わりません。
+
+1. パッケージを入れ替えます。
+
+   ```bash
+   composer remove field-vn/filament-tabler-theme
+   composer require field-vn/filament-themes:^0.1
+   ```
+
+2. コード内の名前を変更します。
+
+   | 変更前 | 変更後 |
+   |---|---|
+   | `TablerTheme::make()` | `FilamentThemes::make()`（`FieldVn\FilamentThemes\FilamentThemes`） |
+   | `->tablerIcons()` | `->icons()` |
+   | CSS 変数 `--tabler-*` | `--ft-*` |
+   | `[data-tabler-sidebar]` | `[data-ft-sidebar]` |
+
+3. `->icons()` を使う場合は `secondnetwork/blade-tabler-icons` をインストールしてください。パッケージと一緒には
+   インストールされなくなりました。
+4. `php artisan filament:assets` を実行し、`public/css/field-vn/` 内の旧パッケージの CSS フォルダーを削除します。
+
 ## 制限事項
 
 - Filament の HTML は変更しない（ビューを公開しない）ため、異なるマークアップが必要なデザインは実現できません。
@@ -340,7 +396,7 @@ composer format    # pint
 すべてのプリセットをテストできるよう、3 つのアイコンセットはすべて `require-dev` に含まれています。CI は PHP 8.3/8.4/8.5 ×
 Laravel 12/13 で最新の Filament を使って実行し、さらに `composer.json` が許容する最小の依存バージョンでも 1 回実行します。
 
-リリース手順: `CHANGELOG.md` を更新し、`main` で `vX.Y.Z` タグを付けます。
+リリース手順: `CHANGELOG.md` を更新し、`development` を `main` にマージしてから、`main` で `vX.Y.Z` タグを付けます。
 
 ## ライセンス
 
@@ -348,3 +404,18 @@ MIT。開発: [field.vn](https://field.vn/)
 
 デザイン言語は Tabler、shadcn/ui、Ant Design（いずれも MIT）に基づいています。アイコンは Tabler Icons（MIT）、
 Lucide（ISC）、Ant Design Icons（MIT）を使用しています。詳細は [`NOTICE`](NOTICE) を参照してください。
+
+## クレジット
+
+このパッケージは、以下のデザインシステムとその作者の成果なしには存在しません。デザイン言語に関するすべての功績は彼らに帰属します。
+
+- **[Tabler](https://tabler.io)**（[GitHub](https://github.com/tabler/tabler)）— Paweł Kuna と The Tabler Authors、MIT
+- **[shadcn/ui](https://ui.shadcn.com)**（[GitHub](https://github.com/shadcn-ui/ui)）— shadcn、MIT
+- **[Ant Design](https://ant.design)**（[GitHub](https://github.com/ant-design/ant-design)）— Ant UED、MIT
+
+アイコン: [Tabler Icons](https://tabler.io/icons)（MIT）、[Lucide](https://lucide.dev)（ISC）、
+[Ant Design Icons](https://ant.design/components/icon)（MIT）。フォント: [Geist](https://vercel.com/font)（SIL OFL 1.1、
+Bunny Fonts から読み込み）。
+
+本プロジェクトは Tabler、shadcn、Ant Group とは提携しておらず、後援・承認も受けていません。Tabler、shadcn/ui、
+Ant Design は各所有者の商標であり、各プリセットがどのデザインシステムに沿っているかを示す目的でのみ使用しています。

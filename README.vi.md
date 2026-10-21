@@ -15,6 +15,7 @@ Phát triển và duy trì bởi [field.vn](https://field.vn/).
 
 - [Tính năng](#tính-năng)
 - [Các preset](#các-preset)
+- [Ảnh chụp màn hình](#ảnh-chụp-màn-hình)
 - [Yêu cầu](#yêu-cầu)
 - [Cài đặt](#cài-đặt)
 - [Sử dụng](#sử-dụng)
@@ -25,9 +26,11 @@ Phát triển và duy trì bởi [field.vn](https://field.vn/).
 - [Chi tiết từng component](#chi-tiết-từng-component)
 - [Cách hoạt động](#cách-hoạt-động)
 - [Nâng cấp Filament](#nâng-cấp-filament)
+- [Nâng cấp từ filament-tabler-theme](#nâng-cấp-từ-filament-tabler-theme)
 - [Giới hạn](#giới-hạn)
 - [Phát triển](#phát-triển)
 - [Giấy phép](#giấy-phép)
+- [Ghi nhận](#ghi-nhận)
 
 ## Tính năng
 
@@ -50,6 +53,30 @@ Phát triển và duy trì bởi [field.vn](https://field.vn/).
 Bảng, nút, modal, thông báo và các component khác đều theo đúng từng design system. Xem
 [chi tiết từng component](#chi-tiết-từng-component).
 
+## Ảnh chụp màn hình
+
+Preset Ant Design, trên trang Theme preview.
+
+| Sáng | Tối |
+|---|---|
+| ![Preset Ant Design, Sáng](images/preview-light.png) | ![Preset Ant Design, Tối](images/preview-dark.png) |
+
+<details>
+<summary>Thêm: đăng nhập, modal, thông báo, mobile, toàn trang</summary>
+
+| | Sáng | Tối |
+|---|---|---|
+| Đăng nhập | ![Preset Ant Design, Đăng nhập, Sáng](images/login-light.png) | ![Preset Ant Design, Đăng nhập, Tối](images/login-dark.png) |
+| Modal form | ![Preset Ant Design, Modal form, Sáng](images/modal-form-light.png) | ![Preset Ant Design, Modal form, Tối](images/modal-form-dark.png) |
+| Hộp thoại xác nhận | ![Preset Ant Design, Hộp thoại xác nhận, Sáng](images/modal-confirm-light.png) | ![Preset Ant Design, Hộp thoại xác nhận, Tối](images/modal-confirm-dark.png) |
+| Wizard | ![Preset Ant Design, Wizard, Sáng](images/modal-wizard-light.png) | ![Preset Ant Design, Wizard, Tối](images/modal-wizard-dark.png) |
+| Slide-over | ![Preset Ant Design, Slide-over, Sáng](images/slide-over-light.png) | ![Preset Ant Design, Slide-over, Tối](images/slide-over-dark.png) |
+| Thông báo | ![Preset Ant Design, Thông báo, Sáng](images/notifications-light.png) | ![Preset Ant Design, Thông báo, Tối](images/notifications-dark.png) |
+| Mobile | ![Preset Ant Design, Mobile, Sáng](images/mobile-light.png) | ![Preset Ant Design, Mobile, Tối](images/mobile-dark.png) |
+| Toàn trang | ![Preset Ant Design, Toàn trang, Sáng](images/preview-full-light.png) | ![Preset Ant Design, Toàn trang, Tối](images/preview-full-dark.png) |
+
+</details>
+
 ## Yêu cầu
 
 - PHP 8.3+
@@ -63,6 +90,10 @@ Bảng, nút, modal, thông báo và các component khác đều theo đúng t�
 ```bash
 composer require field-vn/filament-themes:^0.1
 ```
+
+> [!NOTE]
+> Hiện chưa có phiên bản nào được tag. Trước khi phát hành `v0.1.0`, hãy cài từ nhánh development:
+> `composer require field-vn/filament-themes:dev-development`.
 
 **2. (Tùy chọn) Cài bộ icon của preset**
 
@@ -311,6 +342,29 @@ lần nâng cấp Filament:
    và các file preset.
 3. Mở trang xem trước với từng preset ở light và dark mode, bố cục dọc và ngang, và trên mobile.
 
+## Nâng cấp từ filament-tabler-theme
+
+Package này trước đây tên là `field-vn/filament-tabler-theme`. Tabler vẫn là preset mặc định nên giao diện không đổi.
+
+1. Thay package:
+
+   ```bash
+   composer remove field-vn/filament-tabler-theme
+   composer require field-vn/filament-themes:^0.1
+   ```
+
+2. Đổi tên trong code:
+
+   | Trước | Sau |
+   |---|---|
+   | `TablerTheme::make()` | `FilamentThemes::make()` (`FieldVn\FilamentThemes\FilamentThemes`) |
+   | `->tablerIcons()` | `->icons()` |
+   | Biến CSS `--tabler-*` | `--ft-*` |
+   | `[data-tabler-sidebar]` | `[data-ft-sidebar]` |
+
+3. Nếu dùng `->icons()`, cài `secondnetwork/blade-tabler-icons`. Package không còn tự cài bộ icon này.
+4. Chạy `php artisan filament:assets`, rồi xóa thư mục CSS của package cũ trong `public/css/field-vn/`.
+
 ## Giới hạn
 
 - Không thay đổi HTML của Filament (không publish view), nên những thiết kế cần markup khác không làm được, ví dụ logo
@@ -334,7 +388,7 @@ Test chạy trên [Orchestra Testbench](https://packages.tools/testbench). `test
 nằm trong `require-dev` để test phủ đủ mọi preset. CI chạy trên PHP 8.3/8.4/8.5 × Laravel 12/13 với Filament mới nhất,
 cùng một lượt với phiên bản dependency thấp nhất mà `composer.json` cho phép.
 
-Phát hành: cập nhật `CHANGELOG.md`, rồi tag `vX.Y.Z` trên `main`.
+Phát hành: cập nhật `CHANGELOG.md`, merge `development` vào `main`, rồi tag `vX.Y.Z` trên `main`.
 
 ## Giấy phép
 
@@ -342,3 +396,19 @@ MIT. Phát triển bởi [field.vn](https://field.vn/).
 
 Ngôn ngữ thiết kế theo Tabler, shadcn/ui và Ant Design (đều MIT). Icon từ Tabler Icons (MIT), Lucide (ISC) và Ant Design
 Icons (MIT). Xem [`NOTICE`](NOTICE) để biết chi tiết.
+
+## Ghi nhận
+
+Gói này không thể có nếu không có công sức của các design system dưới đây và tác giả của chúng. Toàn bộ công lao về ngôn
+ngữ thiết kế thuộc về họ:
+
+- **[Tabler](https://tabler.io)** ([GitHub](https://github.com/tabler/tabler)) của Paweł Kuna và The Tabler Authors, MIT
+- **[shadcn/ui](https://ui.shadcn.com)** ([GitHub](https://github.com/shadcn-ui/ui)) của shadcn, MIT
+- **[Ant Design](https://ant.design)** ([GitHub](https://github.com/ant-design/ant-design)) của Ant UED, MIT
+
+Icon: [Tabler Icons](https://tabler.io/icons) (MIT), [Lucide](https://lucide.dev) (ISC),
+[Ant Design Icons](https://ant.design/components/icon) (MIT). Font: [Geist](https://vercel.com/font) (SIL OFL 1.1),
+tải từ Bunny Fonts.
+
+Dự án này không liên kết, không được tài trợ hay bảo trợ bởi Tabler, shadcn hoặc Ant Group. Tabler, shadcn/ui và Ant Design
+là thương hiệu của chủ sở hữu tương ứng, chỉ được nhắc đến để mô tả preset nào theo design system nào.

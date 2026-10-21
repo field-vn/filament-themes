@@ -15,6 +15,7 @@ Built and maintained by [field.vn](https://field.vn/).
 
 - [Features](#features)
 - [Presets](#presets)
+- [Screenshots](#screenshots)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -25,9 +26,11 @@ Built and maintained by [field.vn](https://field.vn/).
 - [Component reference](#component-reference)
 - [How it works](#how-it-works)
 - [Upgrading Filament](#upgrading-filament)
+- [Upgrading from filament-tabler-theme](#upgrading-from-filament-tabler-theme)
 - [Limitations](#limitations)
 - [Development](#development)
 - [License](#license)
+- [Credits](#credits)
 
 ## Features
 
@@ -50,6 +53,30 @@ Built and maintained by [field.vn](https://field.vn/).
 Tables, buttons, modals, notifications and other components are styled to match each system. See the
 [component reference](#component-reference) for the details.
 
+## Screenshots
+
+Ant Design preset, on the Theme preview page.
+
+| Light | Dark |
+|---|---|
+| ![Ant Design preset, Light](images/preview-light.png) | ![Ant Design preset, Dark](images/preview-dark.png) |
+
+<details>
+<summary>More: login, modals, notifications, mobile, full page</summary>
+
+| | Light | Dark |
+|---|---|---|
+| Login | ![Ant Design preset, Login, Light](images/login-light.png) | ![Ant Design preset, Login, Dark](images/login-dark.png) |
+| Form modal | ![Ant Design preset, Form modal, Light](images/modal-form-light.png) | ![Ant Design preset, Form modal, Dark](images/modal-form-dark.png) |
+| Confirmation dialog | ![Ant Design preset, Confirmation dialog, Light](images/modal-confirm-light.png) | ![Ant Design preset, Confirmation dialog, Dark](images/modal-confirm-dark.png) |
+| Wizard | ![Ant Design preset, Wizard, Light](images/modal-wizard-light.png) | ![Ant Design preset, Wizard, Dark](images/modal-wizard-dark.png) |
+| Slide-over | ![Ant Design preset, Slide-over, Light](images/slide-over-light.png) | ![Ant Design preset, Slide-over, Dark](images/slide-over-dark.png) |
+| Notifications | ![Ant Design preset, Notifications, Light](images/notifications-light.png) | ![Ant Design preset, Notifications, Dark](images/notifications-dark.png) |
+| Mobile | ![Ant Design preset, Mobile, Light](images/mobile-light.png) | ![Ant Design preset, Mobile, Dark](images/mobile-dark.png) |
+| Full page | ![Ant Design preset, Full page, Light](images/preview-full-light.png) | ![Ant Design preset, Full page, Dark](images/preview-full-dark.png) |
+
+</details>
+
 ## Requirements
 
 - PHP 8.3+
@@ -63,6 +90,10 @@ Tables, buttons, modals, notifications and other components are styled to match 
 ```bash
 composer require field-vn/filament-themes:^0.1
 ```
+
+> [!NOTE]
+> No version has been tagged yet. Until `v0.1.0` is released, require the development branch instead:
+> `composer require field-vn/filament-themes:dev-development`.
 
 **2. (Optional) Install the icon set for your preset**
 
@@ -316,6 +347,30 @@ After each Filament upgrade:
    `core.css` and the preset files.
 3. Open the preview page with each preset in light and dark mode, vertical and horizontal layouts, and on mobile.
 
+## Upgrading from filament-tabler-theme
+
+This package was previously named `field-vn/filament-tabler-theme`. Tabler is still the default preset, so the look
+doesn't change.
+
+1. Replace the package:
+
+   ```bash
+   composer remove field-vn/filament-tabler-theme
+   composer require field-vn/filament-themes:^0.1
+   ```
+
+2. Rename in your code:
+
+   | Before | After |
+   |---|---|
+   | `TablerTheme::make()` | `FilamentThemes::make()` (`FieldVn\FilamentThemes\FilamentThemes`) |
+   | `->tablerIcons()` | `->icons()` |
+   | CSS variables `--tabler-*` | `--ft-*` |
+   | `[data-tabler-sidebar]` | `[data-ft-sidebar]` |
+
+3. If you use `->icons()`, install `secondnetwork/blade-tabler-icons`. It is no longer installed with the package.
+4. Run `php artisan filament:assets`, then delete the old package's CSS folder under `public/css/field-vn/`.
+
 ## Limitations
 
 - Filament's HTML is not changed (no views are published), so designs that need different markup aren't possible, such as
@@ -339,7 +394,7 @@ panel like the one `filament:install --panels` generates, with the plugin added 
 sets are in `require-dev` so every preset is tested. CI runs on PHP 8.3/8.4/8.5 × Laravel 12/13 with the latest Filament,
 plus one run with the lowest dependency versions `composer.json` allows.
 
-To release: update `CHANGELOG.md`, then tag `vX.Y.Z` on `main`.
+To release: update `CHANGELOG.md`, merge `development` into `main`, then tag `vX.Y.Z` on `main`.
 
 ## License
 
@@ -347,3 +402,19 @@ MIT. Developed by [field.vn](https://field.vn/).
 
 The design language follows Tabler, shadcn/ui and Ant Design (all MIT). Icons come from Tabler Icons (MIT), Lucide (ISC)
 and Ant Design Icons (MIT). See [`NOTICE`](NOTICE) for details.
+
+## Credits
+
+This package would not exist without the work of these design systems and their authors. All credit for the design
+language goes to them:
+
+- **[Tabler](https://tabler.io)** ([GitHub](https://github.com/tabler/tabler)) by Paweł Kuna and the Tabler Authors, MIT
+- **[shadcn/ui](https://ui.shadcn.com)** ([GitHub](https://github.com/shadcn-ui/ui)) by shadcn, MIT
+- **[Ant Design](https://ant.design)** ([GitHub](https://github.com/ant-design/ant-design)) by Ant UED, MIT
+
+Icons: [Tabler Icons](https://tabler.io/icons) (MIT), [Lucide](https://lucide.dev) (ISC),
+[Ant Design Icons](https://ant.design/components/icon) (MIT). Font: [Geist](https://vercel.com/font) (SIL OFL 1.1),
+loaded from Bunny Fonts.
+
+This project is not affiliated with, sponsored or endorsed by Tabler, shadcn or Ant Group. Tabler, shadcn/ui and
+Ant Design are trademarks of their respective owners, used here only to describe which design system each preset follows.
