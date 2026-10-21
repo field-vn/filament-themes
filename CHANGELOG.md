@@ -1,9 +1,10 @@
 # Changelog
 
-## Unreleased
+## v1.0.0 - 2026-10-21
 
-- Renamed `field-vn/filament-tabler-theme` → `field-vn/filament-themes`; class `TablerTheme` → `FilamentThemes`,
-  `->tablerIcons()` → `->icons()`, CSS variables `--tabler-*` → `--ft-*`, `data-tabler-sidebar` → `data-ft-sidebar`.
+First public release. Projects on the former `field-vn/filament-tabler-theme`: see
+[Upgrading from filament-tabler-theme](README.md#upgrading-from-filament-tabler-theme).
+
 - Three presets, chosen with `->preset()`: Tabler (default), shadcn/ui, Ant Design. Each preset has its own palette, icon
   set, font and layout.
 - CSS split into `core.css` (structure, reads tokens only) + one file per preset. No build step, light/dark, mobile.
